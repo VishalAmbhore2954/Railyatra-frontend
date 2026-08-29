@@ -1,0 +1,182 @@
+<div class="min-h-screen bg-slate-100 p-6">
+
+  <div class="max-w-6xl mx-auto">
+
+    <!-- Header -->
+    <div class="flex justify-between items-center mb-6">
+
+      <div>
+        <h1 class="text-3xl font-bold text-gray-800">
+          Train Management
+        </h1>
+
+        <p class="text-gray-500 mt-1">
+          Manage all trains in Rail Yatra
+        </p>
+      </div>
+
+      <!-- Total Trains -->
+      <div class="bg-white px-6 py-4 rounded-xl shadow">
+
+        <p class="text-sm text-gray-500">
+          Total Trains
+        </p>
+
+        <p class="text-2xl font-bold text-blue-600">
+          {{ trains.length }}
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <!-- Train Table -->
+    <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+
+      <!-- Table Header -->
+      <div class="bg-gradient-to-r from-blue-700 to-indigo-700
+                  text-white px-6 py-5">
+
+        <h2 class="text-xl font-bold">
+          All Trains
+        </h2>
+
+        <p class="text-blue-100 text-sm mt-1">
+          View all available trains
+        </p>
+
+      </div>
+
+
+      <!-- Table -->
+      <div class="overflow-x-auto">
+
+        <table class="w-full">
+
+          <thead class="bg-gray-100">
+
+            <tr>
+
+              <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">
+                #
+              </th>
+
+              <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">
+                Train Number
+              </th>
+
+              <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">
+                Train Name
+              </th>
+
+              <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">
+                Train Type
+              </th>
+
+            </tr>
+
+          </thead>
+
+
+          <tbody>
+
+            @for (train of trains; track train.id; let i = $index) {
+
+              <tr
+                class="border-b hover:bg-blue-50 transition">
+
+                <!-- Number -->
+                <td class="px-6 py-5 font-semibold text-gray-500">
+                  {{ i + 1 }}
+                </td>
+
+
+                <!-- Train Number -->
+                <td class="px-6 py-5">
+
+                  <span class="font-bold text-blue-700">
+                    {{ train.trainnumber }}
+                  </span>
+
+                </td>
+
+
+                <!-- Train Name -->
+                <td class="px-6 py-5">
+
+                  <div class="flex items-center gap-3">
+
+                    <div
+                      class="w-10 h-10 rounded-lg bg-blue-100
+                             flex items-center justify-center">
+
+                      🚆
+
+                    </div>
+
+                    <span class="font-semibold text-gray-800">
+                      {{ train.trainname }}
+                    </span>
+
+                  </div>
+
+                </td>
+
+
+                <!-- Train Type -->
+                <td class="px-6 py-5">
+
+                  <span
+                    class="inline-block bg-indigo-100 text-indigo-700
+                           px-4 py-2 rounded-full text-sm font-semibold">
+
+                    {{ train.traintype }}
+
+                  </span>
+
+                </td>
+
+              </tr>
+
+            }
+
+
+            <!-- No Trains -->
+            @if (trains.length === 0) {
+
+              <tr>
+
+                <td
+                  colspan="4"
+                  class="px-6 py-16 text-center">
+
+                  <div class="text-5xl mb-4">
+                    🚆
+                  </div>
+
+                  <h3 class="text-xl font-bold text-gray-700">
+                    No Trains Found
+                  </h3>
+
+                  <p class="text-gray-500 mt-2">
+                    Add a train to see it here.
+                  </p>
+
+                </td>
+
+              </tr>
+
+            }
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
