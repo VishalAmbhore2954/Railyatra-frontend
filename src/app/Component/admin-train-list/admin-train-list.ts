@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Tain } from '../Services/tain';
+import { Tain } from '../../Services/tain';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 

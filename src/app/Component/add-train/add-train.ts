@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Tain } from '../Services/tain';
+import { Tain } from '../../Services/tain';
 
 @Component({
   selector: 'app-add-train',
