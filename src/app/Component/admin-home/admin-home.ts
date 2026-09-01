@@ -22,6 +22,7 @@ export class AdminHome implements OnInit {
   };
 
   trains: any[] = [];
+  total_trains : any;
 
 
   // =========================
@@ -36,6 +37,10 @@ export class AdminHome implements OnInit {
   };
 
   stations: any[] = [];
+  total_stations : any;
+
+  routes: any[] = [];
+  total_routes : any;
 
 
   // =========================
@@ -65,6 +70,8 @@ export class AdminHome implements OnInit {
 
     this.loadStations();
 
+    this.loadRoutes();
+
   }
 
 
@@ -77,6 +84,8 @@ export class AdminHome implements OnInit {
         console.log('Trains:', response);
 
         this.trains = response;
+
+        this.total_trains = this.trains.length;
 
       },
 
@@ -91,6 +100,30 @@ export class AdminHome implements OnInit {
   }
 
 
+  loadRoutes() {
+
+    this.adminService.getRoutes().subscribe({
+
+      next: (response: any[]) => {
+
+        console.log('Routes:', response);
+
+        this.routes = response.reverse();
+
+        this.total_routes = this.routes.length;
+
+      },
+
+      error: (error: any) => {
+
+        console.error('Error loading routes:', error);
+
+      }
+
+    });
+
+  }
+
   loadStations() {
 
     this.adminService.getStations().subscribe({
@@ -100,6 +133,8 @@ export class AdminHome implements OnInit {
         console.log('Stations:', response);
 
         this.stations = response;
+
+        this.total_stations = this.stations.length;
 
       },
 
