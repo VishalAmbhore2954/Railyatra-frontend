@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { AdminService } from '../../Services/admin-service';
 
 @Component({
   selector: 'app-admin-home',
@@ -17,34 +17,43 @@ export class AdminHome {
     traintype: ''
   };
 
-  constructor(private http: HttpClient) {}
+
+  station = {
+    station_name: '',
+    station_code: '',
+    city: '',
+    state: ''
+  };
+
+
+  constructor(private adminService: AdminService) {}
+
+
+  // =========================
+  // ADD TRAIN
+  // =========================
 
   addTrain() {
 
-    // Validation
     if (
       !this.train.trainname ||
       !this.train.trainnumber ||
       !this.train.numberofcoach ||
       !this.train.traintype
     ) {
-      alert('Please fill all fields');
+      alert('Please fill all train fields');
       return;
     }
 
-    // API call
-    this.http.post(
-      'http://127.0.0.1:8080/api/trains',
-      this.train
-    ).subscribe({
 
-      next: (response) => {
+    this.adminService.postTrain(this.train).subscribe({
 
-        console.log('API Response:', response);
+      next: (response: any) => {
+
+        console.log('Train added:', response);
 
         alert('Train added successfully');
 
-        // Clear form
         this.train = {
           trainname: '',
           trainnumber: '',
@@ -54,11 +63,58 @@ export class AdminHome {
 
       },
 
-      error: (error) => {
+      error: (error: any) => {
 
-        console.error('API Error:', error);
+        console.error('Train error:', error);
 
         alert('Failed to add train');
+
+      }
+
+    });
+
+  }
+
+
+  // =========================
+  // ADD STATION
+  // =========================
+
+  addStation() {
+
+    if (
+      !this.station.station_name ||
+      !this.station.station_code ||
+      !this.station.city ||
+      !this.station.state
+    ) {
+      alert('Please fill all station fields');
+      return;
+    }
+
+
+    this.adminService.postStation(this.station).subscribe({
+
+      next: (response: any) => {
+
+        console.log('Station added:', response);
+
+        alert('Station added successfully');
+
+        this.station = {
+          station_name: '',
+          station_code: '',
+          city: '',
+          state: ''
+        };
+
+      },
+
+      error: (error: any) => {
+
+        console.error('Station error:', error);
+
+        alert('Failed to add station');
 
       }
 

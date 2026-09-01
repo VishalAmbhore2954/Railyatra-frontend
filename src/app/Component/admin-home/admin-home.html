@@ -440,7 +440,7 @@
               Station Name
             </label>
 
-            <input type="text" placeholder="Enter station name"
+            <input type="text" [(ngModel)]="station.station_name" placeholder="Enter station name"
               class="w-full rounded-lg border border-slate-300 px-4 py-3 text-sm outline-none transition placeholder:text-slate-400 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100">
 
           </div>
@@ -453,8 +453,8 @@
               Station Code
             </label>
 
-            <input type="text" placeholder="e.g. PUNE"
-              class="w-full rounded-lg border border-slate-300 px-4 py-3 text-sm uppercase outline-none transition placeholder:normal-case placeholder:text-slate-400 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100">
+            <input type="text" [(ngModel)]="station.station_code" placeholder="e.g. PUNE"
+              class="w-full rounded-lg border border-slate-300 px-4 py-3 text-sm uppercase outline-none transition placeholder:text-slate-400 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100">
 
           </div>
 
@@ -466,7 +466,7 @@
               City
             </label>
 
-            <input type="text" placeholder="Enter city"
+            <input type="text" [(ngModel)]="station.city" placeholder="Enter city"
               class="w-full rounded-lg border border-slate-300 px-4 py-3 text-sm outline-none transition placeholder:text-slate-400 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100">
 
           </div>
@@ -479,22 +479,23 @@
               State
             </label>
 
-            <select
+            <select [(ngModel)]="station.state"
               class="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-sm outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100">
 
-              <option>Select state</option>
-              <option>Maharashtra</option>
-              <option>Gujarat</option>
-              <option>Madhya Pradesh</option>
-              <option>Delhi</option>
-              <option>Karnataka</option>
+              <option value="">Select state</option>
+              <option value="MH">Maharashtra</option>
+              <option value="GJ">Gujarat</option>
+              <option value="MP">Madhya Pradesh</option>
+              <option value="DL">Delhi</option>
+              <option value="KA">Karnataka</option>
 
             </select>
 
           </div>
 
 
-          <button
+          <!-- Add Station -->
+          <button type="button" (click)="addStation()"
             class="w-full rounded-lg bg-emerald-600 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-600/20 transition hover:bg-emerald-700">
 
             + Add Station
