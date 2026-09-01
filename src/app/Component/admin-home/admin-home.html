@@ -25,8 +25,7 @@
       </p>
 
       <!-- Dashboard -->
-      <a
-        href="#"
+      <a href="#"
         class="mb-2 flex items-center gap-3 rounded-xl bg-blue-600 px-4 py-3 text-sm font-medium shadow-lg shadow-blue-600/20">
         <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -36,8 +35,7 @@
       </a>
 
       <!-- Trains -->
-      <a
-        href="#"
+      <a href="#"
         class="mb-2 flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-slate-300 transition hover:bg-white/5 hover:text-white">
         <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -47,8 +45,7 @@
       </a>
 
       <!-- Stations -->
-      <a
-        href="#"
+      <a href="#"
         class="mb-2 flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-slate-300 transition hover:bg-white/5 hover:text-white">
         <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -59,8 +56,7 @@
       </a>
 
       <!-- Routes -->
-      <a
-        href="#"
+      <a href="#"
         class="mb-6 flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-slate-300 transition hover:bg-white/5 hover:text-white">
         <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -74,8 +70,7 @@
       </p>
 
       <!-- Add Train -->
-      <a
-        href="#"
+      <a href="#"
         class="mb-2 flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-slate-300 transition hover:bg-white/5 hover:text-white">
         <span class="flex h-6 w-6 items-center justify-center rounded-full border border-slate-500">
           +
@@ -84,8 +79,7 @@
       </a>
 
       <!-- Add Station -->
-      <a
-        href="#"
+      <a href="#"
         class="mb-2 flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-slate-300 transition hover:bg-white/5 hover:text-white">
         <span class="flex h-6 w-6 items-center justify-center rounded-full border border-slate-500">
           +
@@ -94,8 +88,7 @@
       </a>
 
       <!-- Add Route -->
-      <a
-        href="#"
+      <a href="#"
         class="mb-6 flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-slate-300 transition hover:bg-white/5 hover:text-white">
         <span class="flex h-6 w-6 items-center justify-center rounded-full border border-slate-500">
           +
@@ -107,22 +100,19 @@
         Others
       </p>
 
-      <a
-        href="#"
+      <a href="#"
         class="mb-2 flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-slate-300 hover:bg-white/5 hover:text-white">
         🎟️
         Bookings
       </a>
 
-      <a
-        href="#"
+      <a href="#"
         class="mb-2 flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-slate-300 hover:bg-white/5 hover:text-white">
         👤
         Users
       </a>
 
-      <a
-        href="#"
+      <a href="#"
         class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-slate-300 hover:bg-white/5 hover:text-white">
         📊
         Reports
@@ -132,15 +122,13 @@
     <!-- Bottom -->
     <div class="absolute bottom-0 w-full border-t border-white/10 p-4">
 
-      <a
-        href="#"
+      <a href="#"
         class="mb-2 flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-slate-300 hover:bg-white/5 hover:text-white">
         ⚙️
         Settings
       </a>
 
-      <a
-        href="#"
+      <a href="#"
         class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-slate-300 hover:bg-red-500/10 hover:text-red-400">
         ↪
         Logout
@@ -173,8 +161,7 @@
         <div class="flex items-center gap-5">
 
           <!-- Notification -->
-          <button
-            class="relative rounded-lg p-2 text-slate-500 hover:bg-slate-100 hover:text-slate-900">
+          <button class="relative rounded-lg p-2 text-slate-500 hover:bg-slate-100 hover:text-slate-900">
 
             <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -358,9 +345,7 @@
               Train Number
             </label>
 
-            <input
-              type="text"
-              placeholder="Enter train number"
+            <input type="text" [(ngModel)]="train.trainnumber" placeholder="Enter train number"
               class="w-full rounded-lg border border-slate-300 px-4 py-3 text-sm outline-none transition placeholder:text-slate-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-100">
 
           </div>
@@ -373,9 +358,20 @@
               Train Name
             </label>
 
-            <input
-              type="text"
-              placeholder="Enter train name"
+            <input type="text" [(ngModel)]="train.trainname" placeholder="Enter train name"
+              class="w-full rounded-lg border border-slate-300 px-4 py-3 text-sm outline-none transition placeholder:text-slate-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-100">
+
+          </div>
+
+
+          <!-- Number Of Coaches -->
+          <div class="mb-4">
+
+            <label class="mb-2 block text-sm font-medium text-slate-700">
+              Number of Coaches
+            </label>
+
+            <input type="number" [(ngModel)]="train.numberofcoach" placeholder="Enter number of coaches"
               class="w-full rounded-lg border border-slate-300 px-4 py-3 text-sm outline-none transition placeholder:text-slate-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-100">
 
           </div>
@@ -388,22 +384,23 @@
               Train Type
             </label>
 
-            <select
+            <select [(ngModel)]="train.traintype"
               class="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100">
 
-              <option>Select train type</option>
-              <option>Express</option>
-              <option>Superfast</option>
-              <option>Rajdhani</option>
-              <option>Shatabdi</option>
-              <option>Passenger</option>
+              <option value="">Select train type</option>
+              <option value="Express">Express</option>
+              <option value="Superfast">Superfast</option>
+              <option value="Rajdhani">Rajdhani</option>
+              <option value="Shatabdi">Shatabdi</option>
+              <option value="Passenger">Passenger</option>
 
             </select>
 
           </div>
 
 
-          <button
+          <!-- Add Button -->
+          <button type="button" (click)="addTrain()"
             class="w-full rounded-lg bg-blue-600 py-3 text-sm font-semibold text-white shadow-lg shadow-blue-600/20 transition hover:bg-blue-700 active:scale-[0.99]">
 
             + Add Train
@@ -443,9 +440,7 @@
               Station Name
             </label>
 
-            <input
-              type="text"
-              placeholder="Enter station name"
+            <input type="text" placeholder="Enter station name"
               class="w-full rounded-lg border border-slate-300 px-4 py-3 text-sm outline-none transition placeholder:text-slate-400 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100">
 
           </div>
@@ -458,9 +453,7 @@
               Station Code
             </label>
 
-            <input
-              type="text"
-              placeholder="e.g. PUNE"
+            <input type="text" placeholder="e.g. PUNE"
               class="w-full rounded-lg border border-slate-300 px-4 py-3 text-sm uppercase outline-none transition placeholder:normal-case placeholder:text-slate-400 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100">
 
           </div>
@@ -473,9 +466,7 @@
               City
             </label>
 
-            <input
-              type="text"
-              placeholder="Enter city"
+            <input type="text" placeholder="Enter city"
               class="w-full rounded-lg border border-slate-300 px-4 py-3 text-sm outline-none transition placeholder:text-slate-400 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100">
 
           </div>
@@ -584,9 +575,7 @@
               Station Order
             </label>
 
-            <input
-              type="number"
-              placeholder="1, 2, 3..."
+            <input type="number" placeholder="1, 2, 3..."
               class="w-full rounded-lg border border-slate-300 px-4 py-3 text-sm outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-100">
 
           </div>
@@ -601,8 +590,7 @@
                 Arrival
               </label>
 
-              <input
-                type="time"
+              <input type="time"
                 class="w-full rounded-lg border border-slate-300 px-3 py-3 text-sm outline-none focus:border-purple-500">
 
             </div>
@@ -613,8 +601,7 @@
                 Departure
               </label>
 
-              <input
-                type="time"
+              <input type="time"
                 class="w-full rounded-lg border border-slate-300 px-3 py-3 text-sm outline-none focus:border-purple-500">
 
             </div>
@@ -659,7 +646,8 @@
 
         <!-- Header -->
 
-        <div class="flex flex-col gap-3 border-b border-slate-200 px-6 py-5 sm:flex-row sm:items-center sm:justify-between">
+        <div
+          class="flex flex-col gap-3 border-b border-slate-200 px-6 py-5 sm:flex-row sm:items-center sm:justify-between">
 
           <div>
 
@@ -770,13 +758,11 @@
 
                 <td class="px-6 py-4 text-right">
 
-                  <button
-                    class="mr-2 rounded-lg border border-blue-200 p-2 text-blue-600 hover:bg-blue-50">
+                  <button class="mr-2 rounded-lg border border-blue-200 p-2 text-blue-600 hover:bg-blue-50">
                     ✎
                   </button>
 
-                  <button
-                    class="rounded-lg border border-red-200 p-2 text-red-600 hover:bg-red-50">
+                  <button class="rounded-lg border border-red-200 p-2 text-red-600 hover:bg-red-50">
                     🗑
                   </button>
 
@@ -823,13 +809,11 @@
 
                 <td class="px-6 py-4 text-right">
 
-                  <button
-                    class="mr-2 rounded-lg border border-blue-200 p-2 text-blue-600 hover:bg-blue-50">
+                  <button class="mr-2 rounded-lg border border-blue-200 p-2 text-blue-600 hover:bg-blue-50">
                     ✎
                   </button>
 
-                  <button
-                    class="rounded-lg border border-red-200 p-2 text-red-600 hover:bg-red-50">
+                  <button class="rounded-lg border border-red-200 p-2 text-red-600 hover:bg-red-50">
                     🗑
                   </button>
 
@@ -876,13 +860,11 @@
 
                 <td class="px-6 py-4 text-right">
 
-                  <button
-                    class="mr-2 rounded-lg border border-blue-200 p-2 text-blue-600 hover:bg-blue-50">
+                  <button class="mr-2 rounded-lg border border-blue-200 p-2 text-blue-600 hover:bg-blue-50">
                     ✎
                   </button>
 
-                  <button
-                    class="rounded-lg border border-red-200 p-2 text-red-600 hover:bg-red-50">
+                  <button class="rounded-lg border border-red-200 p-2 text-red-600 hover:bg-red-50">
                     🗑
                   </button>
 
@@ -929,13 +911,11 @@
 
                 <td class="px-6 py-4 text-right">
 
-                  <button
-                    class="mr-2 rounded-lg border border-blue-200 p-2 text-blue-600 hover:bg-blue-50">
+                  <button class="mr-2 rounded-lg border border-blue-200 p-2 text-blue-600 hover:bg-blue-50">
                     ✎
                   </button>
 
-                  <button
-                    class="rounded-lg border border-red-200 p-2 text-red-600 hover:bg-red-50">
+                  <button class="rounded-lg border border-red-200 p-2 text-red-600 hover:bg-red-50">
                     🗑
                   </button>
 
