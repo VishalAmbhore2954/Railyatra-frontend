@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AdminService } from '../../Services/admin-service';
 
@@ -8,7 +8,11 @@ import { AdminService } from '../../Services/admin-service';
   templateUrl: './admin-home.html',
   styleUrl: './admin-home.css'
 })
-export class AdminHome {
+export class AdminHome implements OnInit {
+
+  // =========================
+  // TRAIN
+  // =========================
 
   train = {
     trainname: '',
@@ -17,6 +21,12 @@ export class AdminHome {
     traintype: ''
   };
 
+  trains: any[] = [];
+
+
+  // =========================
+  // STATION
+  // =========================
 
   station = {
     station_name: '',
@@ -25,8 +35,83 @@ export class AdminHome {
     state: ''
   };
 
+  stations: any[] = [];
+
+
+  // =========================
+  // ROUTE
+  // =========================
+
+  route = {
+    train_id: null,
+    station_id: null,
+    station_order: null,
+    arrival_time: '',
+    departure_time: '',
+    has_stop: null
+  };
+
 
   constructor(private adminService: AdminService) {}
+
+
+  // =========================
+  // LOAD DATA
+  // =========================
+
+  ngOnInit(): void {
+
+    this.loadTrains();
+
+    this.loadStations();
+
+  }
+
+
+  loadTrains() {
+
+    this.adminService.getTrains().subscribe({
+
+      next: (response: any[]) => {
+
+        console.log('Trains:', response);
+
+        this.trains = response;
+
+      },
+
+      error: (error: any) => {
+
+        console.error('Error loading trains:', error);
+
+      }
+
+    });
+
+  }
+
+
+  loadStations() {
+
+    this.adminService.getStations().subscribe({
+
+      next: (response: any[]) => {
+
+        console.log('Stations:', response);
+
+        this.stations = response;
+
+      },
+
+      error: (error: any) => {
+
+        console.error('Error loading stations:', error);
+
+      }
+
+    });
+
+  }
 
 
   // =========================
@@ -41,8 +126,11 @@ export class AdminHome {
       !this.train.numberofcoach ||
       !this.train.traintype
     ) {
+
       alert('Please fill all train fields');
+
       return;
+
     }
 
 
@@ -60,6 +148,9 @@ export class AdminHome {
           numberofcoach: 0,
           traintype: ''
         };
+
+        // Refresh train dropdown
+        this.loadTrains();
 
       },
 
@@ -88,8 +179,11 @@ export class AdminHome {
       !this.station.city ||
       !this.station.state
     ) {
+
       alert('Please fill all station fields');
+
       return;
+
     }
 
 
@@ -108,6 +202,9 @@ export class AdminHome {
           state: ''
         };
 
+        // Refresh station dropdown
+        this.loadStations();
+
       },
 
       error: (error: any) => {
@@ -115,6 +212,65 @@ export class AdminHome {
         console.error('Station error:', error);
 
         alert('Failed to add station');
+
+      }
+
+    });
+
+  }
+
+
+  // =========================
+  // ADD ROUTE
+  // =========================
+
+  addRoute() {
+
+    if (
+      !this.route.train_id ||
+      !this.route.station_id ||
+      !this.route.station_order ||
+      !this.route.arrival_time ||
+      !this.route.departure_time ||
+      this.route.has_stop === null
+    ) {
+
+      alert('Please fill all route fields');
+
+      return;
+
+    }
+
+
+    console.log('Route data:', this.route);
+
+
+    this.adminService.postRoute(this.route).subscribe({
+
+      next: (response: any) => {
+
+        console.log('Route added:', response);
+
+        alert('Route added successfully');
+
+
+        // Reset route form
+        this.route = {
+          train_id: null,
+          station_id: null,
+          station_order: null,
+          arrival_time: '',
+          departure_time: '',
+          has_stop: null
+        };
+
+      },
+
+      error: (error: any) => {
+
+        console.error('Route error:', error);
+
+        alert('Failed to add route');
 
       }
 

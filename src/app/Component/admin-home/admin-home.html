@@ -535,13 +535,20 @@
               Train
             </label>
 
-            <select
+            <select [(ngModel)]="route.train_id"
               class="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-sm outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-100">
 
-              <option>Select train</option>
-              <option>12345 - Rajdhani Express</option>
-              <option>12009 - Shatabdi Express</option>
-              <option>12123 - Deccan Queen</option>
+              <option [ngValue]="null">
+                Select train
+              </option>
+
+              @for (train of trains; track train.id) {
+
+              <option [ngValue]="train.id">
+                {{ train.trainnumber }} - {{ train.trainname }}
+              </option>
+
+              }
 
             </select>
 
@@ -555,14 +562,20 @@
               Station
             </label>
 
-            <select
+            <select [(ngModel)]="route.station_id"
               class="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-sm outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-100">
 
-              <option>Select station</option>
-              <option>Pune (PUNE)</option>
-              <option>Mumbai (CSMT)</option>
-              <option>Nashik (NK)</option>
-              <option>Ahmedabad (ADI)</option>
+              <option [ngValue]="null">
+                Select station
+              </option>
+
+              @for (station of stations; track station.id) {
+
+              <option [ngValue]="station.id">
+                {{ station.station_name }} ({{ station.station_code }})
+              </option>
+
+              }
 
             </select>
 
@@ -576,12 +589,13 @@
               Station Order
             </label>
 
-            <input type="number" placeholder="1, 2, 3..."
+            <input type="number" [(ngModel)]="route.station_order" placeholder="1, 2, 3..."
               class="w-full rounded-lg border border-slate-300 px-4 py-3 text-sm outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-100">
 
           </div>
 
 
+          <!-- Times -->
           <!-- Times -->
           <div class="mb-4 grid grid-cols-2 gap-3">
 
@@ -591,10 +605,12 @@
                 Arrival
               </label>
 
-              <input type="time"
+              <input type="text" [(ngModel)]="route.arrival_time" placeholder="HH:mm" maxlength="5"
+                pattern="([01][0-9]|2[0-3]):[0-5][0-9]"
                 class="w-full rounded-lg border border-slate-300 px-3 py-3 text-sm outline-none focus:border-purple-500">
 
             </div>
+
 
             <div>
 
@@ -602,7 +618,8 @@
                 Departure
               </label>
 
-              <input type="time"
+              <input type="text" [(ngModel)]="route.departure_time" placeholder="HH:mm" maxlength="5"
+                pattern="([01][0-9]|2[0-3]):[0-5][0-9]"
                 class="w-full rounded-lg border border-slate-300 px-3 py-3 text-sm outline-none focus:border-purple-500">
 
             </div>
@@ -617,20 +634,29 @@
               Has Stop
             </label>
 
-            <select
+            <select [(ngModel)]="route.has_stop"
               class="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-sm outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-100">
 
-              <option>Select</option>
-              <option value="true">Yes</option>
-              <option value="false">No</option>
+              <option [ngValue]="null">
+                Select
+              </option>
+
+              <option [ngValue]="true">
+                Yes
+              </option>
+
+              <option [ngValue]="false">
+                No
+              </option>
 
             </select>
 
           </div>
 
 
-          <button
-            class="w-full rounded-lg bg-purple-600 py-3 text-sm font-semibold text-white shadow-lg shadow-purple-600/20 transition hover:bg-purple-700">
+          <!-- Add Route -->
+          <button type="button" (click)="addRoute()"
+            class="w-full rounded-lg bg-purple-600 py-3 text-sm font-semibold text-white shadow-lg shadow-purple-600/20 transition hover:bg-purple-700 active:scale-[0.99]">
 
             + Add Route
 

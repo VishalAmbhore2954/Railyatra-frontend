@@ -3,50 +3,63 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class AdminService {
 
-  private http = inject(HttpClient);
+    private http = inject(HttpClient);
 
-  private apiUrl = environment.apiUrl;
-
-
-  // =========================
-  // TRAIN API
-  // =========================
-
-  postTrain(data: any) {
-    return this.http.post(
-      `${this.apiUrl}/trains`,
-      data
-    );
-  }
+    private apiUrl = environment.apiUrl;
 
 
-  getTrains() {
-    return this.http.get<any[]>(
-      `${this.apiUrl}/trains`
-    );
-  }
+    // =========================
+    // TRAIN API
+    // =========================
+
+    postTrain(data: any) {
+        return this.http.post(
+            `${this.apiUrl}/trains`,
+            data
+        );
+    }
 
 
-  // =========================
-  // STATION API
-  // =========================
-
-  postStation(data: any) {
-    return this.http.post(
-      `${this.apiUrl}/stations`,
-      data
-    );
-  }
+    getTrains() {
+        return this.http.get<any[]>(
+            `${this.apiUrl}/trains`
+        );
+    }
 
 
-  getStations() {
-    return this.http.get<any[]>(
-      `${this.apiUrl}/stations`
-    );
-  }
+    // =========================
+    // STATION API
+    // =========================
+
+    postStation(data: any) {
+        return this.http.post(
+            `${this.apiUrl}/stations`,
+            data
+        );
+    }
+
+
+    getStations() {
+        return this.http.get<any[]>(
+            `${this.apiUrl}/stations`
+        );
+    }
+
+    postRoute(data: any) {
+        return this.http.post(
+            `${this.apiUrl}/routes`,
+            data
+        );
+    }
+
+    getRoutes() {
+        return this.http.get<any[]>(
+            `${this.apiUrl}/routes`
+        );
+    }
 
 }
