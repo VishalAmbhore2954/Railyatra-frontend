@@ -1,0 +1,364 @@
+<div class="min-h-screen bg-slate-100 p-6">
+
+  <!-- Header -->
+  <div class="mb-6">
+    <h1 class="text-2xl font-bold text-slate-800">
+      Add Train Route
+    </h1>
+
+    <p class="mt-1 text-sm text-slate-500">
+      Add a station to a train route and define its timing.
+    </p>
+  </div>
+
+
+  <div class="grid grid-cols-1 gap-6 lg:grid-cols-3">
+
+    <!-- ================= FORM ================= -->
+
+    <div class="lg:col-span-2 rounded-2xl bg-white p-6 shadow-sm">
+
+      <div class="mb-6 flex items-center gap-3">
+
+        <div
+          class="flex h-11 w-11 items-center justify-center rounded-xl bg-blue-100 text-xl">
+          🚆
+        </div>
+
+        <div>
+          <h2 class="text-lg font-semibold text-slate-800">
+            Route Information
+          </h2>
+
+          <p class="text-sm text-slate-500">
+            Enter train and station details
+          </p>
+        </div>
+
+      </div>
+
+
+      <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
+
+        <!-- Train -->
+
+        <div>
+          <label class="mb-2 block text-sm font-medium text-slate-700">
+            Select Train
+          </label>
+
+          <select
+            [(ngModel)]="route.train_id"
+            name="train_id"
+            class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100">
+
+            <option [ngValue]="null">
+              Select Train
+            </option>
+
+            @for (train of trains; track train.id) {
+
+              <option [ngValue]="train.id">
+                {{ train.trainname }} - {{ train.trainnumber }}
+              </option>
+
+            }
+
+          </select>
+        </div>
+
+
+        <!-- Station -->
+
+        <div>
+          <label class="mb-2 block text-sm font-medium text-slate-700">
+            Select Station
+          </label>
+
+          <select
+            [(ngModel)]="route.station_id"
+            name="station_id"
+            class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100">
+
+            <option [ngValue]="null">
+              Select Station
+            </option>
+
+            @for (station of stations; track station.id) {
+
+              <option [ngValue]="station.id">
+                {{ station.station_name }}
+                ({{ station.station_code }})
+              </option>
+
+            }
+
+          </select>
+        </div>
+
+
+        <!-- Station Order -->
+
+        <div>
+          <label class="mb-2 block text-sm font-medium text-slate-700">
+            Station Order
+          </label>
+
+          <input
+            type="number"
+            [(ngModel)]="route.station_order"
+            name="station_order"
+            min="1"
+            placeholder="Example: 1"
+            class="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100">
+        </div>
+
+
+        <!-- Has Stop -->
+
+        <div>
+          <label class="mb-2 block text-sm font-medium text-slate-700">
+            Has Stop
+          </label>
+
+          <select
+            [(ngModel)]="route.has_stop"
+            name="has_stop"
+            class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100">
+
+            <option [ngValue]="true">
+              Yes - Train Stops
+            </option>
+
+            <option [ngValue]="false">
+              No - Passing Station
+            </option>
+
+          </select>
+        </div>
+
+
+        <!-- Arrival -->
+
+        <div>
+          <label class="mb-2 block text-sm font-medium text-slate-700">
+            Arrival Time
+          </label>
+
+          <input
+            type="time"
+            [(ngModel)]="route.arrival"
+            name="arrival"
+            step="60"
+            class="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100">
+        </div>
+
+
+        <!-- Departure -->
+
+        <div>
+          <label class="mb-2 block text-sm font-medium text-slate-700">
+            Departure Time
+          </label>
+
+          <input
+            type="time"
+            [(ngModel)]="route.departure"
+            name="departure"
+            step="60"
+            class="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100">
+        </div>
+
+      </div>
+
+
+      <!-- Buttons -->
+
+      <div class="mt-7 flex flex-col gap-3 border-t border-slate-100 pt-6 sm:flex-row">
+
+        <button
+          type="button"
+          (click)="addRoute()"
+          class="flex-1 rounded-xl bg-blue-600 px-5 py-3 font-semibold text-white transition hover:bg-blue-700 active:scale-[0.99]">
+
+          + Add Route
+
+        </button>
+
+
+        <button
+          type="button"
+          (click)="resetForm()"
+          class="rounded-xl border border-slate-300 px-6 py-3 font-semibold text-slate-600 transition hover:bg-slate-50">
+
+          Reset
+
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- ================= PREVIEW ================= -->
+
+    <div class="rounded-2xl bg-slate-900 p-6 text-white shadow-sm">
+
+      <div class="mb-6">
+
+        <p class="text-xs font-semibold uppercase tracking-wider text-blue-400">
+          Route Preview
+        </p>
+
+        <h2 class="mt-1 text-xl font-bold">
+          Train Route
+        </h2>
+
+      </div>
+
+
+      <!-- Train -->
+
+      <div class="mb-5">
+
+        <p class="text-xs text-slate-400">
+          TRAIN
+        </p>
+
+        @if (route.train_id) {
+
+          @for (train of trains; track train.id) {
+
+            @if (train.id == route.train_id) {
+
+              <p class="mt-1 font-semibold">
+                {{ train.trainname }}
+              </p>
+
+              <p class="text-sm text-slate-400">
+                {{ train.trainnumber }}
+              </p>
+
+            }
+
+          }
+
+        } @else {
+
+          <p class="mt-1 text-slate-500">
+            No train selected
+          </p>
+
+        }
+
+      </div>
+
+
+      <!-- Route Line -->
+
+      <div class="relative border-l-2 border-blue-500 pl-5">
+
+        <!-- Station -->
+
+        <div class="mb-8">
+
+          <div class="absolute -left-[7px] h-3 w-3 rounded-full bg-blue-500"></div>
+
+          <p class="text-xs text-slate-400">
+            STATION {{ route.station_order || '-' }}
+          </p>
+
+          @if (route.station_id) {
+
+            @for (station of stations; track station.id) {
+
+              @if (station.id == route.station_id) {
+
+                <p class="mt-1 font-semibold">
+                  {{ station.station_name }}
+                </p>
+
+                <p class="text-sm text-slate-400">
+                  {{ station.station_code }}
+                </p>
+
+              }
+
+            }
+
+          } @else {
+
+            <p class="mt-1 text-slate-500">
+              No station selected
+            </p>
+
+          }
+
+        </div>
+
+
+        <!-- Arrival -->
+
+        <div class="mb-5">
+
+          <p class="text-xs text-slate-400">
+            ARRIVAL
+          </p>
+
+          <p class="mt-1 text-lg font-semibold">
+            {{ route.arrival || '--:--' }}
+          </p>
+
+        </div>
+
+
+        <!-- Departure -->
+
+        <div>
+
+          <p class="text-xs text-slate-400">
+            DEPARTURE
+          </p>
+
+          <p class="mt-1 text-lg font-semibold">
+            {{ route.departure || '--:--' }}
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- Stop Status -->
+
+      <div class="mt-8 rounded-xl bg-slate-800 p-4">
+
+        <div class="flex items-center justify-between">
+
+          <span class="text-sm text-slate-400">
+            Train Stop
+          </span>
+
+          @if (route.has_stop) {
+
+            <span class="rounded-full bg-green-500/20 px-3 py-1 text-xs font-semibold text-green-400">
+              YES
+            </span>
+
+          } @else {
+
+            <span class="rounded-full bg-red-500/20 px-3 py-1 text-xs font-semibold text-red-400">
+              NO
+            </span>
+
+          }
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

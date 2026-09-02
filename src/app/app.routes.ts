@@ -8,6 +8,14 @@ import { BookingPage } from './Component/booking-page/booking-page';
 import { AddTrain } from './Component/add-train/add-train';
 import { AdminTrainList } from './Component/admin-train-list/admin-train-list';
 import { AdminHome } from './Component/admin-home/admin-home';
+import { AddStation } from './Component/add-station/add-station';
+import { AddRoute } from './Component/add-route/add-route';
+import { AddSeats } from './Component/add-seats/add-seats';
+import { AddCoach } from './Component/add-coach/add-coach';
+import { AdminStationList } from './Component/admin-station-list/admin-station-list';
+import { AdminCoachList } from './Component/admin-coach-list/admin-coach-list';
+import { AdminRouteList } from './Component/admin-route-list/admin-route-list';
+import { AdminSeatList } from './Component/admin-seat-list/admin-seat-list';
 
 export const routes: Routes = [
     { path: '', component: Home},
@@ -24,7 +32,15 @@ export const routes: Routes = [
         children:[
             {path: '',component:AdminHome},
             {path: 'add-train',component:AddTrain},
-            {path: 'train-list',component:AdminTrainList}
+            {path: 'add-station',component:AddStation},
+            {path: 'add-route',component:AddRoute},
+            {path: 'add-seat',component:AddSeats},
+            {path: 'add-coach',component:AddCoach},
+            {path: 'train-list',component:AdminTrainList},
+            {path: 'station-list',component:AdminStationList},
+            {path: 'coach-list',component:AdminCoachList},
+            {path: 'route-list',component:AdminRouteList},
+            {path: 'seat-list',component:AdminSeatList}
         ]
     }
 ];

@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AdminService } from '../../Services/admin-service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-admin-home',
-  imports: [FormsModule],
+  imports: [FormsModule,RouterLink],
   templateUrl: './admin-home.html',
   styleUrl: './admin-home.css'
 })

@@ -62,4 +62,30 @@ export class AdminService {
         );
     }
 
+    postCoaches(data: any) {
+        return this.http.post(
+            `${this.apiUrl}/coaches`,
+            data
+        );
+    }
+
+    getCoaches() {
+        return this.http.get<any[]>(
+            `${this.apiUrl}/coaches`
+        );
+    }
+
+    postSeats(data: any) {
+        return this.http.post(
+            `${this.apiUrl}/seats`,
+            data
+        );
+    }
+
+    getSeats() {
+        return this.http.get<any[]>(
+            `${this.apiUrl}/seats`
+        );
+    }
+
 }

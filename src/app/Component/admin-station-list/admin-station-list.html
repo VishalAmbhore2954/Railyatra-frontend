@@ -1,0 +1,414 @@
+<div class="min-h-screen bg-slate-100 p-6">
+
+  <!-- Header -->
+  <div class="mb-6 flex flex-col justify-between gap-4 md:flex-row md:items-center">
+
+    <div>
+      <h1 class="text-2xl font-bold text-slate-800">
+        Station Management
+      </h1>
+
+      <p class="mt-1 text-sm text-slate-500">
+        Manage railway stations and their details
+      </p>
+    </div>
+
+    <a
+      routerLink="/admin/add-station"
+      class="inline-flex items-center justify-center rounded-xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-blue-700">
+
+      + Add Station
+
+    </a>
+
+  </div>
+
+
+  <!-- Main Card -->
+  <div class="overflow-hidden rounded-2xl bg-white shadow-sm">
+
+
+    <!-- Toolbar -->
+    <div
+      class="flex flex-col gap-4 border-b border-slate-200 p-5 md:flex-row md:items-center md:justify-between">
+
+      <!-- Search -->
+      <div class="relative w-full md:w-96">
+
+        <span
+          class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">
+          🔍
+        </span>
+
+        <input
+          type="text"
+          [(ngModel)]="searchText"
+          (input)="onSearch()"
+          placeholder="Search station, code, city..."
+          class="w-full rounded-xl border border-slate-300 py-3 pl-11 pr-4 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+        />
+
+      </div>
+
+
+      <!-- Total -->
+      <div class="rounded-xl bg-slate-50 px-4 py-3">
+
+        <span class="text-sm text-slate-500">
+          Total Stations
+        </span>
+
+        <span class="ml-2 font-bold text-slate-800">
+          {{ filteredStations.length }}
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- Table -->
+    <div class="overflow-x-auto">
+
+      <table class="w-full min-w-[900px]">
+
+        <thead class="bg-slate-50">
+
+          <tr>
+
+            <th
+              class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-slate-500">
+              #
+            </th>
+
+            <th
+              class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-slate-500">
+              Station
+            </th>
+
+            <th
+              class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-slate-500">
+              Code
+            </th>
+
+            <th
+              class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-slate-500">
+              City
+            </th>
+
+            <th
+              class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-slate-500">
+              State
+            </th>
+
+            <th
+              class="px-6 py-4 text-center text-xs font-semibold uppercase tracking-wider text-slate-500">
+              Status
+            </th>
+
+            <th
+              class="px-6 py-4 text-right text-xs font-semibold uppercase tracking-wider text-slate-500">
+              Action
+            </th>
+
+          </tr>
+
+        </thead>
+
+
+        <tbody class="divide-y divide-slate-100">
+
+          @for (
+            station of paginatedStations;
+            track station.id;
+            let i = $index
+          ) {
+
+            <tr class="transition hover:bg-slate-50">
+
+
+              <!-- # -->
+
+              <td class="px-6 py-4 text-sm text-slate-500">
+
+                {{
+                  (currentPage - 1) * itemsPerPage + i + 1
+                }}
+
+              </td>
+
+
+              <!-- Station -->
+
+              <td class="px-6 py-4">
+
+                <div class="flex items-center gap-3">
+
+                  <div
+                    class="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50 text-lg">
+                    🚉
+                  </div>
+
+                  <div>
+
+                    <p class="font-semibold text-slate-800">
+                      {{ station.station_name }}
+                    </p>
+
+                    <p class="text-xs text-slate-500">
+                      Railway Station
+                    </p>
+
+                  </div>
+
+                </div>
+
+              </td>
+
+
+              <!-- Code -->
+
+              <td class="px-6 py-4">
+
+                <span
+                  class="rounded-lg bg-blue-50 px-3 py-1.5 text-sm font-bold text-blue-700">
+
+                  {{ station.station_code }}
+
+                </span>
+
+              </td>
+
+
+              <!-- City -->
+
+              <td class="px-6 py-4">
+
+                <div class="flex items-center gap-2">
+
+                  <span class="text-lg">
+                    📍
+                  </span>
+
+                  <span class="text-sm font-medium text-slate-700">
+                    {{ station.city }}
+                  </span>
+
+                </div>
+
+              </td>
+
+
+              <!-- State -->
+
+              <td class="px-6 py-4">
+
+                <span class="text-sm font-medium text-slate-700">
+                  {{ station.state }}
+                </span>
+
+              </td>
+
+
+              <!-- Status -->
+
+              <td class="px-6 py-4 text-center">
+
+                @if (
+                  station.status === true ||
+                  station.status === 'ACTIVE' ||
+                  station.status === 'active'
+                ) {
+
+                  <span
+                    class="rounded-full bg-green-50 px-3 py-1 text-xs font-semibold text-green-700">
+
+                    Active
+
+                  </span>
+
+                } @else {
+
+                  <span
+                    class="rounded-full bg-green-50 px-3 py-1 text-xs font-semibold text-green-700">
+
+                    Active
+
+                  </span>
+
+                }
+
+              </td>
+
+
+              <!-- Action -->
+
+              <td class="px-6 py-4">
+
+                <div class="flex justify-end gap-2">
+
+                  <button
+                    type="button"
+                    class="rounded-lg border border-slate-200 px-3 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-100">
+
+                    View
+
+                  </button>
+
+                  <button
+                    type="button"
+                    class="rounded-lg border border-blue-200 px-3 py-2 text-sm font-medium text-blue-600 transition hover:bg-blue-50">
+
+                    Edit
+
+                  </button>
+
+                </div>
+
+              </td>
+
+            </tr>
+
+          }
+
+
+          <!-- Empty -->
+
+          @if (paginatedStations.length === 0) {
+
+            <tr>
+
+              <td
+                colspan="7"
+                class="px-6 py-16 text-center">
+
+                <div class="text-5xl">
+                  🚉
+                </div>
+
+                <p class="mt-4 font-semibold text-slate-700">
+                  No stations found
+                </p>
+
+                <p class="mt-1 text-sm text-slate-500">
+                  Try changing your search or add a new station.
+                </p>
+
+              </td>
+
+            </tr>
+
+          }
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+
+    <!-- Pagination -->
+
+    @if (totalPages > 0) {
+
+      <div
+        class="flex flex-col gap-4 border-t border-slate-200 px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
+
+
+        <!-- Showing -->
+
+        <div class="text-sm text-slate-500">
+
+          Showing
+
+          <span class="font-semibold text-slate-700">
+            {{ ((currentPage - 1) * itemsPerPage) + 1 }}
+          </span>
+
+          -
+
+          <span class="font-semibold text-slate-700">
+
+            {{
+              Math.min(
+                currentPage * itemsPerPage,
+                filteredStations.length
+              )
+            }}
+
+          </span>
+
+          of
+
+          <span class="font-semibold text-slate-700">
+            {{ filteredStations.length }}
+          </span>
+
+          stations
+
+        </div>
+
+
+        <!-- Pagination Buttons -->
+
+        <div class="flex items-center gap-1">
+
+
+          <!-- Previous -->
+
+          <button
+            type="button"
+            (click)="previousPage()"
+            [disabled]="currentPage === 1"
+            class="rounded-lg border border-slate-200 px-3 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-100 disabled:cursor-not-allowed disabled:opacity-40">
+
+            ←
+
+          </button>
+
+
+          <!-- Page Numbers -->
+
+          @for (page of pages; track page) {
+
+            <button
+              type="button"
+              (click)="goToPage(page)"
+              class="h-9 min-w-9 rounded-lg px-3 text-sm font-medium transition"
+
+              [class.bg-blue-600]="currentPage === page"
+
+              [class.text-white]="currentPage === page"
+
+              [class.text-slate-600]="currentPage !== page"
+
+              [class.hover:bg-slate-100]="currentPage !== page">
+
+              {{ page }}
+
+            </button>
+
+          }
+
+
+          <!-- Next -->
+
+          <button
+            type="button"
+            (click)="nextPage()"
+            [disabled]="currentPage === totalPages"
+            class="rounded-lg border border-slate-200 px-3 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-100 disabled:cursor-not-allowed disabled:opacity-40">
+
+            →
+
+          </button>
+
+        </div>
+
+      </div>
+
+    }
+
+  </div>
+
+</div>
