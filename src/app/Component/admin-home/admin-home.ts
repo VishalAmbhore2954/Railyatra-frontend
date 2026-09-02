@@ -22,7 +22,7 @@ export class AdminHome implements OnInit {
   };
 
   trains: any[] = [];
-  total_trains : any;
+  total_trains: any;
 
 
   // =========================
@@ -37,10 +37,10 @@ export class AdminHome implements OnInit {
   };
 
   stations: any[] = [];
-  total_stations : any;
+  total_stations: any;
 
   routes: any[] = [];
-  total_routes : any;
+  total_routes: any;
 
 
   // =========================
@@ -48,16 +48,16 @@ export class AdminHome implements OnInit {
   // =========================
 
   route = {
-    train_id: null,
-    station_id: null,
-    station_order: null,
-    arrival_time: '',
-    departure_time: '',
-    has_stop: null
+    train_id: null as number | null,
+    station_id: null as number | null,
+    station_order: null as number | null,
+    arrival: '' as string,
+    departure: '' as string,
+    has_stop: null as boolean | null
   };
 
 
-  constructor(private adminService: AdminService) {}
+  constructor(private adminService: AdminService) { }
 
 
   // =========================
@@ -259,46 +259,49 @@ export class AdminHome implements OnInit {
   // ADD ROUTE
   // =========================
 
-  addRoute() {
+  addRoute(): void {
 
     if (
-      !this.route.train_id ||
-      !this.route.station_id ||
-      !this.route.station_order ||
-      !this.route.arrival_time ||
-      !this.route.departure_time ||
+      this.route.train_id === null ||
+      this.route.station_id === null ||
+      this.route.station_order === null ||
+      !this.route.arrival ||
+      !this.route.departure ||
       this.route.has_stop === null
     ) {
-
       alert('Please fill all route fields');
-
       return;
-
     }
 
+    const routeData = {
+      train_id: this.route.train_id,
+      station_id: this.route.station_id,
+      station_order: this.route.station_order,
+      arrival: this.route.arrival,       // "08:30"
+      departure: this.route.departure,   // "08:35"
+      has_stop: this.route.has_stop
+    };
 
-    console.log('Route data:', this.route);
+    console.log('Sending route:', routeData);
 
-
-    this.adminService.postRoute(this.route).subscribe({
+    this.adminService.postRoute(routeData).subscribe({
 
       next: (response: any) => {
 
         console.log('Route added:', response);
 
-        alert('Route added successfully');
-
-
-        // Reset route form
         this.route = {
           train_id: null,
           station_id: null,
           station_order: null,
-          arrival_time: '',
-          departure_time: '',
+          arrival: '',
+          departure: '',
           has_stop: null
         };
 
+        alert('Route added successfully');
+
+        this.loadRoutes();
       },
 
       error: (error: any) => {
@@ -310,7 +313,6 @@ export class AdminHome implements OnInit {
       }
 
     });
-
   }
 
 }
