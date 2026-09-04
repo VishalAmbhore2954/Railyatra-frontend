@@ -15,7 +15,9 @@ export class AdminCoachList implements OnInit {
   Math = Math;
 
   coaches: any[] = [];
+
   searchText = '';
+
   currentPage = 1;
   itemsPerPage = 8;
 
@@ -25,33 +27,97 @@ export class AdminCoachList implements OnInit {
     this.loadCoaches();
   }
 
+  // =========================
+  // LOAD COACHES
+  // =========================
+
   loadCoaches(): void {
+
+    console.log('Calling Coach API...');
+
     this.adminService.getCoaches().subscribe({
-      next: (response: any[]) => {
-        this.coaches = response;
+
+      next: (response: any) => {
+
+        console.log('COACH RESPONSE:', response);
+
+        if (Array.isArray(response)) {
+
+          this.coaches = response;
+
+        } else if (Array.isArray(response?.data)) {
+
+          this.coaches = response.data;
+
+        } else {
+
+          console.error('Unexpected coach response:', response);
+
+          this.coaches = [];
+        }
+
+        console.log('FINAL COACHES:', this.coaches);
+        console.log('TOTAL COACHES:', this.coaches.length);
+
         this.currentPage = 1;
       },
+
       error: (error) => {
-        console.error('Error loading coaches:', error);
+
+        console.error('COACH API ERROR:', error);
+
+        this.coaches = [];
       }
+
     });
   }
 
+  // =========================
+  // SEARCH
+  // =========================
+
   get filteredCoaches(): any[] {
 
-    if (!this.searchText.trim()) {
+    const search = this.searchText.trim().toLowerCase();
+
+    if (!search) {
       return this.coaches;
     }
 
-    const search = this.searchText.toLowerCase();
-
     return this.coaches.filter(coach =>
-      coach.coach_number?.toString().toLowerCase().includes(search) ||
-      coach.coach_type?.toLowerCase().includes(search) ||
-      coach.train?.trainname?.toLowerCase().includes(search) ||
-      coach.train?.trainnumber?.toString().toLowerCase().includes(search)
+
+      coach.coach_number
+        ?.toString()
+        .toLowerCase()
+        .includes(search)
+
+      ||
+
+      coach.coach_type
+        ?.toString()
+        .toLowerCase()
+        .includes(search)
+
+      ||
+
+      coach.train?.trainname
+        ?.toString()
+        .toLowerCase()
+        .includes(search)
+
+      ||
+
+      coach.train?.trainnumber
+        ?.toString()
+        .toLowerCase()
+        .includes(search)
+
     );
   }
+
+  // =========================
+  // PAGINATION
+  // =========================
 
   get paginatedCoaches(): any[] {
 
@@ -79,9 +145,16 @@ export class AdminCoachList implements OnInit {
     );
   }
 
+  // =========================
+  // PAGE
+  // =========================
+
   goToPage(page: number): void {
 
-    if (page < 1 || page > this.totalPages) {
+    if (
+      page < 1 ||
+      page > this.totalPages
+    ) {
       return;
     }
 
@@ -102,7 +175,14 @@ export class AdminCoachList implements OnInit {
     }
   }
 
+  // =========================
+  // SEARCH
+  // =========================
+
   onSearch(): void {
+
     this.currentPage = 1;
+
   }
+
 }

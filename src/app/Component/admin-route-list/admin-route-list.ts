@@ -15,7 +15,9 @@ export class AdminRouteList implements OnInit {
   Math = Math;
 
   routes: any[] = [];
+
   searchText = '';
+
   currentPage = 1;
   itemsPerPage = 8;
 
@@ -25,50 +27,103 @@ export class AdminRouteList implements OnInit {
     this.loadRoutes();
   }
 
+  // =========================
+  // LOAD ROUTES
+  // =========================
+
   loadRoutes(): void {
+
+    console.log('Calling Route API...');
 
     this.adminService.getRoutes().subscribe({
 
       next: (response: any) => {
 
+        console.log('ROUTE RESPONSE:', response);
+
         if (Array.isArray(response)) {
 
-          this.routes = [...response].reverse();
+          this.routes = response;
 
         } else if (Array.isArray(response?.data)) {
 
-          this.routes = [...response.data].reverse();
+          this.routes = response.data;
 
         } else {
 
+          console.error('Unexpected route response:', response);
+
           this.routes = [];
         }
+
+        console.log('FINAL ROUTES:', this.routes);
+        console.log('TOTAL ROUTES:', this.routes.length);
 
         this.currentPage = 1;
       },
 
       error: (error) => {
-        console.error('Error loading routes:', error);
+
+        console.error('ROUTE API ERROR:', error);
+
+        this.routes = [];
       }
+
     });
   }
 
+  // =========================
+  // SEARCH
+  // =========================
+
   get filteredRoutes(): any[] {
 
-    if (!this.searchText.trim()) {
+    const search = this.searchText.trim().toLowerCase();
+
+    if (!search) {
       return this.routes;
     }
 
-    const search = this.searchText.toLowerCase();
-
     return this.routes.filter(route =>
-      route.train?.trainname?.toLowerCase().includes(search) ||
-      route.train?.trainnumber?.toString().toLowerCase().includes(search) ||
-      route.station?.station_name?.toLowerCase().includes(search) ||
-      route.station?.station_code?.toLowerCase().includes(search) ||
-      route.station_order?.toString().includes(search)
+
+      route.train?.trainname
+        ?.toString()
+        .toLowerCase()
+        .includes(search)
+
+      ||
+
+      route.train?.trainnumber
+        ?.toString()
+        .toLowerCase()
+        .includes(search)
+
+      ||
+
+      route.station?.station_name
+        ?.toString()
+        .toLowerCase()
+        .includes(search)
+
+      ||
+
+      route.station?.station_code
+        ?.toString()
+        .toLowerCase()
+        .includes(search)
+
+      ||
+
+      route.station_order
+        ?.toString()
+        .includes(search)
+
     );
   }
+
+  // =========================
+  // PAGINATION
+  // =========================
 
   get paginatedRoutes(): any[] {
 
@@ -96,9 +151,16 @@ export class AdminRouteList implements OnInit {
     );
   }
 
+  // =========================
+  // PAGE
+  // =========================
+
   goToPage(page: number): void {
 
-    if (page < 1 || page > this.totalPages) {
+    if (
+      page < 1 ||
+      page > this.totalPages
+    ) {
       return;
     }
 
@@ -119,7 +181,14 @@ export class AdminRouteList implements OnInit {
     }
   }
 
+  // =========================
+  // SEARCH
+  // =========================
+
   onSearch(): void {
+
     this.currentPage = 1;
+
   }
+
 }

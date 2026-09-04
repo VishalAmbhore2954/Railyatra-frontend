@@ -1,7 +1,8 @@
-<div class="min-h-screen bg-slate-100 p-6">
+<div class="min-h-screen bg-slate-100 p-4 sm:p-6">
 
-  <!-- Header -->
-  <div class="mb-6 flex flex-col justify-between gap-4 md:flex-row md:items-center">
+  <!-- ================= HEADER ================= -->
+  <div
+    class="mb-6 flex flex-col justify-between gap-4 md:flex-row md:items-center">
 
     <div>
       <h1 class="text-2xl font-bold text-slate-800">
@@ -13,24 +14,63 @@
       </p>
     </div>
 
+    <!-- Add Seat -->
     <a
       routerLink="/admin/add-seat"
-      class="inline-flex items-center justify-center rounded-xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-blue-700">
+      class="inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-700">
 
-      + Add Seat
+      <span class="text-lg">
+        +
+      </span>
+
+      Add Seat
 
     </a>
 
   </div>
 
 
-  <!-- Main Card -->
-  <div class="overflow-hidden rounded-2xl bg-white shadow-sm">
+  <!-- ================= DEBUG ================= -->
+  <div
+    class="mb-5 rounded-xl border border-yellow-200 bg-yellow-50 p-4 text-sm text-yellow-800">
+
+    <div class="flex flex-wrap gap-6">
+
+      <div>
+        Seats:
+        <span class="font-bold">
+          {{ seats.length }}
+        </span>
+      </div>
+
+      <div>
+        Filtered:
+        <span class="font-bold">
+          {{ filteredSeats.length }}
+        </span>
+      </div>
+
+      <div>
+        Paginated:
+        <span class="font-bold">
+          {{ paginatedSeats.length }}
+        </span>
+      </div>
+
+    </div>
+
+  </div>
 
 
-    <!-- Toolbar -->
+  <!-- ================= MAIN CARD ================= -->
+  <div
+    class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+
+
+    <!-- ================= TOOLBAR ================= -->
     <div
       class="flex flex-col gap-4 border-b border-slate-200 p-5 md:flex-row md:items-center md:justify-between">
+
 
       <!-- Search -->
       <div class="relative w-full md:w-96">
@@ -45,14 +85,15 @@
           [(ngModel)]="searchText"
           (input)="onSearch()"
           placeholder="Search train, coach, seat..."
-          class="w-full rounded-xl border border-slate-300 py-3 pl-11 pr-4 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+          class="w-full rounded-xl border border-slate-300 bg-white py-3 pl-11 pr-4 text-sm text-slate-700 outline-none transition placeholder:text-slate-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
         />
 
       </div>
 
 
-      <!-- Total -->
-      <div class="rounded-xl bg-slate-50 px-4 py-3">
+      <!-- Total Seats -->
+      <div
+        class="flex items-center justify-between rounded-xl bg-slate-50 px-4 py-3 md:justify-start">
 
         <span class="text-sm text-slate-500">
           Total Seats
@@ -67,45 +108,53 @@
     </div>
 
 
-    <!-- Table -->
+    <!-- ================= TABLE ================= -->
     <div class="overflow-x-auto">
 
       <table class="w-full min-w-[1000px]">
 
-        <thead class="bg-slate-50">
+        <!-- TABLE HEADER -->
+        <thead class="border-b border-slate-200 bg-slate-50">
 
           <tr>
 
+            <!-- # -->
             <th
               class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-slate-500">
               #
             </th>
 
+            <!-- Train -->
             <th
               class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-slate-500">
               Train
             </th>
 
+            <!-- Coach -->
             <th
               class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-slate-500">
               Coach
             </th>
 
+            <!-- Seat -->
             <th
               class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-slate-500">
               Seat
             </th>
 
+            <!-- Seat Type -->
             <th
               class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-slate-500">
               Seat Type
             </th>
 
+            <!-- Status -->
             <th
               class="px-6 py-4 text-center text-xs font-semibold uppercase tracking-wider text-slate-500">
               Status
             </th>
 
+            <!-- Action -->
             <th
               class="px-6 py-4 text-right text-xs font-semibold uppercase tracking-wider text-slate-500">
               Action
@@ -116,20 +165,26 @@
         </thead>
 
 
+        <!-- TABLE BODY -->
         <tbody class="divide-y divide-slate-100">
+
+
+          <!-- ================= SEAT LOOP ================= -->
 
           @for (
             seat of paginatedSeats;
-            track seat.id;
+            track $index;
             let i = $index
           ) {
 
-            <tr class="transition hover:bg-slate-50">
+            <tr
+              class="transition hover:bg-slate-50">
 
 
-              <!-- # -->
+              <!-- ================= NUMBER ================= -->
 
-              <td class="px-6 py-4 text-sm text-slate-500">
+              <td
+                class="whitespace-nowrap px-6 py-4 text-sm text-slate-500">
 
                 {{
                   (currentPage - 1) * itemsPerPage + i + 1
@@ -138,25 +193,39 @@
               </td>
 
 
-              <!-- Train -->
+              <!-- ================= TRAIN ================= -->
 
               <td class="px-6 py-4">
 
                 <div class="flex items-center gap-3">
 
+
+                  <!-- Train Icon -->
+
                   <div
-                    class="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50 text-lg">
+                    class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-lg">
+
                     🚆
+
                   </div>
 
-                  <div>
 
-                    <p class="font-semibold text-slate-800">
+                  <!-- Train Details -->
+
+                  <div class="min-w-0">
+
+                    <p
+                      class="max-w-[220px] truncate font-semibold text-slate-800">
+
                       {{ seat.coach?.train?.trainname || 'N/A' }}
+
                     </p>
 
-                    <p class="text-xs text-slate-500">
+                    <p class="mt-1 text-xs text-slate-500">
+
+                      Train No:
                       {{ seat.coach?.train?.trainnumber || 'N/A' }}
+
                     </p>
 
                   </div>
@@ -166,21 +235,23 @@
               </td>
 
 
-              <!-- Coach -->
+              <!-- ================= COACH ================= -->
 
               <td class="px-6 py-4">
 
                 <div>
 
                   <span
-                    class="rounded-lg bg-purple-50 px-3 py-1.5 text-sm font-bold text-purple-700">
+                    class="inline-flex rounded-lg bg-purple-50 px-3 py-1.5 text-sm font-bold text-purple-700">
 
                     {{ seat.coach?.coach_number || 'N/A' }}
 
                   </span>
 
                   <p class="mt-2 text-xs text-slate-500">
-                    {{ seat.coach?.coach_type || '' }}
+
+                    {{ seat.coach?.coach_type || 'N/A' }}
+
                   </p>
 
                 </div>
@@ -188,30 +259,30 @@
               </td>
 
 
-              <!-- Seat -->
+              <!-- ================= SEAT ================= -->
 
               <td class="px-6 py-4">
 
                 <span
                   class="inline-flex h-10 min-w-12 items-center justify-center rounded-xl bg-slate-100 px-3 text-sm font-bold text-slate-700">
 
-                  {{ seat.seat_number }}
+                  {{ seat.seat_number || 'N/A' }}
 
                 </span>
 
               </td>
 
 
-              <!-- Seat Type -->
+              <!-- ================= SEAT TYPE ================= -->
 
               <td class="px-6 py-4">
 
                 @if (
-                  seat.seat_type?.toLowerCase() === 'window'
+                  seat.seat_type?.toString()?.toLowerCase() === 'window'
                 ) {
 
                   <span
-                    class="rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700">
+                    class="inline-flex rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700">
 
                     Window
 
@@ -220,11 +291,11 @@
                 }
 
                 @else if (
-                  seat.seat_type?.toLowerCase() === 'aisle'
+                  seat.seat_type?.toString()?.toLowerCase() === 'aisle'
                 ) {
 
                   <span
-                    class="rounded-full bg-green-50 px-3 py-1 text-xs font-semibold text-green-700">
+                    class="inline-flex rounded-full bg-green-50 px-3 py-1 text-xs font-semibold text-green-700">
 
                     Aisle
 
@@ -233,11 +304,11 @@
                 }
 
                 @else if (
-                  seat.seat_type?.toLowerCase() === 'middle'
+                  seat.seat_type?.toString()?.toLowerCase() === 'middle'
                 ) {
 
                   <span
-                    class="rounded-full bg-orange-50 px-3 py-1 text-xs font-semibold text-orange-700">
+                    class="inline-flex rounded-full bg-orange-50 px-3 py-1 text-xs font-semibold text-orange-700">
 
                     Middle
 
@@ -248,7 +319,7 @@
                 @else {
 
                   <span
-                    class="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-600">
+                    class="inline-flex rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-600">
 
                     {{ seat.seat_type || 'N/A' }}
 
@@ -259,18 +330,22 @@
               </td>
 
 
-              <!-- Status -->
+              <!-- ================= STATUS ================= -->
 
               <td class="px-6 py-4 text-center">
 
                 @if (
                   seat.status === true ||
+                  seat.status === 'true' ||
+                  seat.status === 'TRUE' ||
                   seat.status === 'ACTIVE' ||
-                  seat.status === 'AVAILABLE'
+                  seat.status === 'active' ||
+                  seat.status === 'AVAILABLE' ||
+                  seat.status === 'available'
                 ) {
 
                   <span
-                    class="rounded-full bg-green-50 px-3 py-1 text-xs font-semibold text-green-700">
+                    class="inline-flex rounded-full bg-green-50 px-3 py-1 text-xs font-semibold text-green-700">
 
                     Available
 
@@ -281,7 +356,7 @@
                 @else {
 
                   <span
-                    class="rounded-full bg-red-50 px-3 py-1 text-xs font-semibold text-red-700">
+                    class="inline-flex rounded-full bg-red-50 px-3 py-1 text-xs font-semibold text-red-700">
 
                     Inactive
 
@@ -292,23 +367,28 @@
               </td>
 
 
-              <!-- Action -->
+              <!-- ================= ACTION ================= -->
 
               <td class="px-6 py-4">
 
                 <div class="flex justify-end gap-2">
 
+                  <!-- View -->
+
                   <button
                     type="button"
-                    class="rounded-lg border border-slate-200 px-3 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-100">
+                    class="rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-100">
 
                     View
 
                   </button>
 
+
+                  <!-- Edit -->
+
                   <button
                     type="button"
-                    class="rounded-lg border border-blue-200 px-3 py-2 text-sm font-medium text-blue-600 transition hover:bg-blue-50">
+                    class="rounded-lg border border-blue-200 bg-white px-3 py-2 text-sm font-medium text-blue-600 transition hover:bg-blue-50">
 
                     Edit
 
@@ -323,7 +403,7 @@
           }
 
 
-          <!-- Empty -->
+          <!-- ================= EMPTY STATE ================= -->
 
           @if (paginatedSeats.length === 0) {
 
@@ -333,17 +413,46 @@
                 colspan="7"
                 class="px-6 py-16 text-center">
 
-                <div class="text-5xl">
+
+                <!-- Icon -->
+
+                <div
+                  class="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-slate-100 text-4xl">
+
                   💺
+
                 </div>
 
-                <p class="mt-4 font-semibold text-slate-700">
+
+                <!-- Title -->
+
+                <p
+                  class="mt-4 font-semibold text-slate-700">
+
                   No seats found
+
                 </p>
 
-                <p class="mt-1 text-sm text-slate-500">
+
+                <!-- Description -->
+
+                <p
+                  class="mt-1 text-sm text-slate-500">
+
                   Try changing your search or add a new seat.
+
                 </p>
+
+
+                <!-- Add Button -->
+
+                <a
+                  routerLink="/admin/add-seat"
+                  class="mt-5 inline-flex items-center rounded-xl bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-blue-700">
+
+                  + Add Seat
+
+                </a>
 
               </td>
 
@@ -358,7 +467,7 @@
     </div>
 
 
-    <!-- Pagination -->
+    <!-- ================= PAGINATION ================= -->
 
     @if (totalPages > 0) {
 
@@ -366,14 +475,16 @@
         class="flex flex-col gap-4 border-t border-slate-200 px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
 
 
-        <!-- Showing -->
+        <!-- ================= SHOWING ================= -->
 
         <div class="text-sm text-slate-500">
 
           Showing
 
           <span class="font-semibold text-slate-700">
+
             {{ ((currentPage - 1) * itemsPerPage) + 1 }}
+
           </span>
 
           -
@@ -392,7 +503,9 @@
           of
 
           <span class="font-semibold text-slate-700">
+
             {{ filteredSeats.length }}
+
           </span>
 
           seats
@@ -400,7 +513,7 @@
         </div>
 
 
-        <!-- Pagination Buttons -->
+        <!-- ================= PAGE BUTTONS ================= -->
 
         <div class="flex items-center gap-1">
 
@@ -411,7 +524,7 @@
             type="button"
             (click)="previousPage()"
             [disabled]="currentPage === 1"
-            class="rounded-lg border border-slate-200 px-3 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-100 disabled:cursor-not-allowed disabled:opacity-40">
+            class="rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-100 disabled:cursor-not-allowed disabled:opacity-40">
 
             ←
 
@@ -420,7 +533,10 @@
 
           <!-- Page Numbers -->
 
-          @for (page of pages; track page) {
+          @for (
+            page of pages;
+            track page
+          ) {
 
             <button
               type="button"
@@ -448,7 +564,7 @@
             type="button"
             (click)="nextPage()"
             [disabled]="currentPage === totalPages"
-            class="rounded-lg border border-slate-200 px-3 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-100 disabled:cursor-not-allowed disabled:opacity-40">
+            class="rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-100 disabled:cursor-not-allowed disabled:opacity-40">
 
             →
 
