@@ -16,6 +16,7 @@ import { AdminStationList } from './Component/admin-station-list/admin-station-l
 import { AdminCoachList } from './Component/admin-coach-list/admin-coach-list';
 import { AdminRouteList } from './Component/admin-route-list/admin-route-list';
 import { AdminSeatList } from './Component/admin-seat-list/admin-seat-list';
+import { AdminShowRoute } from './admin-show-route/admin-show-route';
 
 export const routes: Routes = [
     { path: '', component: Home},
@@ -40,7 +41,8 @@ export const routes: Routes = [
             {path: 'station-list',component:AdminStationList},
             {path: 'coach-list',component:AdminCoachList},
             {path: 'route-list',component:AdminRouteList},
-            {path: 'seat-list',component:AdminSeatList}
+            {path: 'seat-list',component:AdminSeatList},
+            {path: 'show-route',component:AdminShowRoute},
         ]
     }
 ];

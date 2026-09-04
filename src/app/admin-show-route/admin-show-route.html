@@ -1,0 +1,642 @@
+<div class="min-h-screen bg-[#f5f7fa] p-4 md:p-8">
+
+  <div class="mx-auto max-w-7xl">
+
+    <!-- ================================================= -->
+    <!-- TOP HEADER -->
+    <!-- ================================================= -->
+
+    <div class="mb-8 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+
+      <div>
+        <div class="mb-2 flex items-center gap-2 text-sm text-slate-500">
+          <span>Admin</span>
+          <span>/</span>
+          <span>Trains</span>
+          <span>/</span>
+          <span class="font-medium text-slate-800">Route</span>
+        </div>
+
+        <h1 class="text-3xl font-black tracking-tight text-slate-950">
+          Train Route
+        </h1>
+
+        <p class="mt-1 text-sm text-slate-500">
+          Complete journey route and station stops
+        </p>
+      </div>
+
+      <button
+        class="flex w-fit items-center gap-2 rounded-xl border border-slate-200 bg-white px-5 py-3 text-sm font-bold text-slate-700 shadow-sm transition hover:border-slate-300 hover:bg-slate-50">
+
+        <span>←</span>
+        Back to Trains
+
+      </button>
+
+    </div>
+
+
+    <!-- ================================================= -->
+    <!-- TRAIN HERO -->
+    <!-- ================================================= -->
+
+    <div
+      class="mb-6 overflow-hidden rounded-3xl bg-slate-950 text-white shadow-xl">
+
+      <div class="relative overflow-hidden p-6 md:p-8">
+
+        <!-- Decorative circles -->
+        <div
+          class="absolute -right-20 -top-20 h-64 w-64 rounded-full border border-white/5">
+        </div>
+
+        <div
+          class="absolute -right-10 -top-10 h-44 w-44 rounded-full border border-white/5">
+        </div>
+
+
+        <div
+          class="relative flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
+
+          <!-- TRAIN -->
+          <div class="flex items-center gap-5">
+
+            <div
+              class="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-white text-3xl shadow-lg">
+              🚆
+            </div>
+
+            <div>
+
+              <div class="flex flex-wrap items-center gap-3">
+
+                <h2 class="text-2xl font-black">
+                  Tapovan Express
+                </h2>
+
+                <span
+                  class="rounded-full bg-emerald-400/15 px-3 py-1 text-xs font-bold text-emerald-300 ring-1 ring-emerald-400/20">
+                  EXPRESS
+                </span>
+
+              </div>
+
+              <p class="mt-2 text-sm text-slate-400">
+                Train Number
+                <span class="ml-1 font-bold text-white">
+                  17612
+                </span>
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <!-- STATS -->
+          <div class="grid grid-cols-3 gap-3">
+
+            <div
+              class="min-w-[100px] rounded-2xl border border-white/10 bg-white/5 px-5 py-4">
+
+              <p class="text-xs text-slate-400">
+                Distance
+              </p>
+
+              <p class="mt-1 text-xl font-black">
+                425
+                <span class="text-sm font-medium text-slate-400">
+                  KM
+                </span>
+              </p>
+
+            </div>
+
+
+            <div
+              class="min-w-[100px] rounded-2xl border border-white/10 bg-white/5 px-5 py-4">
+
+              <p class="text-xs text-slate-400">
+                Stations
+              </p>
+
+              <p class="mt-1 text-xl font-black">
+                6
+              </p>
+
+            </div>
+
+
+            <div
+              class="min-w-[100px] rounded-2xl border border-white/10 bg-white/5 px-5 py-4">
+
+              <p class="text-xs text-slate-400">
+                Stops
+              </p>
+
+              <p class="mt-1 text-xl font-black">
+                5
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ================================================= -->
+    <!-- ROUTE MAIN CARD -->
+    <!-- ================================================= -->
+
+    <div
+      class="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
+
+
+      <!-- ROUTE HEADER -->
+
+      <div
+        class="flex flex-col gap-5 border-b border-slate-100 px-6 py-6 md:flex-row md:items-center md:justify-between">
+
+        <div>
+
+          <p class="text-xs font-bold uppercase tracking-widest text-slate-400">
+            Journey Route
+          </p>
+
+          <div class="mt-2 flex items-center gap-3">
+
+            <span class="text-xl font-black text-slate-950">
+              Pune
+            </span>
+
+            <span class="text-slate-300">
+              ─────
+            </span>
+
+            <span class="text-xl font-black text-slate-950">
+              Mumbai
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <!-- LEGEND -->
+
+        <div class="flex flex-wrap items-center gap-5">
+
+          <div class="flex items-center gap-2">
+
+            <span
+              class="h-3 w-3 rounded-full bg-slate-950 ring-4 ring-slate-100">
+            </span>
+
+            <span class="text-xs font-semibold text-slate-600">
+              Train Stop
+            </span>
+
+          </div>
+
+
+          <div class="flex items-center gap-2">
+
+            <span
+              class="h-3 w-3 rounded-full bg-slate-300 ring-4 ring-slate-100">
+            </span>
+
+            <span class="text-xs font-semibold text-slate-400">
+              No Stop
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- ================================================= -->
+      <!-- ROUTE TIMELINE -->
+      <!-- ================================================= -->
+
+      <div class="px-5 py-10 md:px-12 md:py-14">
+
+        <div class="relative mx-auto max-w-5xl">
+
+
+          <!-- ============================================ -->
+          <!-- CENTRAL RAILWAY TRACK -->
+          <!-- ============================================ -->
+
+          <div
+            class="absolute bottom-12 left-1/2 top-12 hidden w-1 -translate-x-1/2 rounded-full bg-slate-200 md:block">
+          </div>
+
+
+          <!-- ================================================= -->
+          <!-- STATION 1 - PUNE -->
+          <!-- ================================================= -->
+
+          <div
+            class="relative mb-14 grid grid-cols-[1fr_80px_1fr] items-center md:mb-20">
+
+            <!-- LEFT CARD -->
+
+            <div class="pr-6 text-right">
+
+              <p class="text-2xl font-black text-slate-950">
+                Pune
+              </p>
+
+              <p class="mt-1 text-sm font-medium text-slate-500">
+                Starting Station
+              </p>
+
+            </div>
+
+
+            <!-- CENTER -->
+
+            <div class="relative z-10 flex justify-center">
+
+              <div
+                class="flex h-14 w-14 items-center justify-center rounded-full border-8 border-white bg-slate-950 shadow-xl ring-1 ring-slate-200">
+
+                <div class="h-3 w-3 rounded-full bg-white"></div>
+
+              </div>
+
+            </div>
+
+
+            <!-- DISTANCE -->
+
+            <div class="pl-6">
+
+              <span
+                class="inline-flex rounded-full bg-slate-950 px-4 py-2 text-sm font-black text-white shadow-sm">
+                0 KM
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <!-- ================================================= -->
+          <!-- STATION 2 - LONAVALA -->
+          <!-- ================================================= -->
+
+          <div
+            class="relative mb-14 grid grid-cols-[1fr_80px_1fr] items-center md:mb-20">
+
+
+            <!-- DISTANCE -->
+
+            <div class="pr-6 text-right">
+
+              <span
+                class="inline-flex rounded-full bg-slate-100 px-4 py-2 text-sm font-bold text-slate-700">
+                65 KM
+              </span>
+
+            </div>
+
+
+            <!-- CENTER -->
+
+            <div class="relative z-10 flex justify-center">
+
+              <div
+                class="h-7 w-7 rounded-full border-4 border-white bg-slate-950 shadow-lg ring-1 ring-slate-300">
+              </div>
+
+            </div>
+
+
+            <!-- CARD -->
+
+            <div class="pl-6">
+
+              <div
+                class="inline-block rounded-2xl border border-slate-200 bg-white px-5 py-4 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+
+                <p class="text-lg font-black text-slate-950">
+                  Lonavala
+                </p>
+
+                <p class="mt-1 text-xs font-medium text-slate-500">
+                  Train Stops Here
+                </p>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- ================================================= -->
+          <!-- STATION 3 - KHOPOLI -->
+          <!-- ================================================= -->
+
+          <div
+            class="relative mb-14 grid grid-cols-[1fr_80px_1fr] items-center md:mb-20">
+
+
+            <!-- CARD -->
+
+            <div class="pr-6 text-right">
+
+              <div
+                class="inline-block rounded-2xl border border-slate-200 bg-white px-5 py-4 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+
+                <p class="text-lg font-black text-slate-950">
+                  Khopoli
+                </p>
+
+                <p class="mt-1 text-xs font-medium text-slate-500">
+                  Train Stops Here
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <!-- CENTER -->
+
+            <div class="relative z-10 flex justify-center">
+
+              <div
+                class="h-7 w-7 rounded-full border-4 border-white bg-slate-950 shadow-lg ring-1 ring-slate-300">
+              </div>
+
+            </div>
+
+
+            <!-- DISTANCE -->
+
+            <div class="pl-6">
+
+              <span
+                class="inline-flex rounded-full bg-slate-100 px-4 py-2 text-sm font-bold text-slate-700">
+                105 KM
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <!-- ================================================= -->
+          <!-- STATION 4 - KARJAT NO STOP -->
+          <!-- ================================================= -->
+
+          <div
+            class="relative mb-14 grid grid-cols-[1fr_80px_1fr] items-center md:mb-20">
+
+
+            <!-- DISTANCE -->
+
+            <div class="pr-6 text-right">
+
+              <span
+                class="inline-flex rounded-full bg-slate-50 px-4 py-2 text-sm font-semibold text-slate-400">
+                180 KM
+              </span>
+
+            </div>
+
+
+            <!-- CENTER -->
+
+            <div class="relative z-10 flex justify-center">
+
+              <div
+                class="h-6 w-6 rounded-full border-4 border-white bg-slate-300 shadow-sm ring-1 ring-slate-200">
+              </div>
+
+            </div>
+
+
+            <!-- CARD -->
+
+            <div class="pl-6">
+
+              <div
+                class="inline-block rounded-2xl border border-dashed border-slate-200 bg-slate-50 px-5 py-4">
+
+                <div class="flex items-center gap-2">
+
+                  <p class="text-lg font-bold text-slate-400">
+                    Karjat
+                  </p>
+
+                  <span
+                    class="rounded-full bg-slate-200 px-2 py-1 text-[10px] font-bold uppercase text-slate-500">
+                    No Stop
+                  </span>
+
+                </div>
+
+                <p class="mt-1 text-xs text-slate-400">
+                  Train passes through
+                </p>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- ================================================= -->
+          <!-- STATION 5 - PANVEL -->
+          <!-- ================================================= -->
+
+          <div
+            class="relative mb-14 grid grid-cols-[1fr_80px_1fr] items-center md:mb-20">
+
+
+            <!-- CARD -->
+
+            <div class="pr-6 text-right">
+
+              <div
+                class="inline-block rounded-2xl border border-slate-200 bg-white px-5 py-4 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+
+                <p class="text-lg font-black text-slate-950">
+                  Panvel
+                </p>
+
+                <p class="mt-1 text-xs font-medium text-slate-500">
+                  Train Stops Here
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <!-- CENTER -->
+
+            <div class="relative z-10 flex justify-center">
+
+              <div
+                class="h-7 w-7 rounded-full border-4 border-white bg-slate-950 shadow-lg ring-1 ring-slate-300">
+              </div>
+
+            </div>
+
+
+            <!-- DISTANCE -->
+
+            <div class="pl-6">
+
+              <span
+                class="inline-flex rounded-full bg-slate-100 px-4 py-2 text-sm font-bold text-slate-700">
+                285 KM
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <!-- ================================================= -->
+          <!-- END - MUMBAI -->
+          <!-- ================================================= -->
+
+          <div
+            class="relative grid grid-cols-[1fr_80px_1fr] items-center">
+
+
+            <!-- DISTANCE -->
+
+            <div class="pr-6 text-right">
+
+              <span
+                class="inline-flex rounded-full bg-slate-100 px-4 py-2 text-sm font-bold text-slate-700">
+                425 KM
+              </span>
+
+            </div>
+
+
+            <!-- CENTER -->
+
+            <div class="relative z-10 flex justify-center">
+
+              <div
+                class="flex h-14 w-14 items-center justify-center rounded-full border-8 border-white bg-slate-950 shadow-xl ring-1 ring-slate-200">
+
+                <div class="h-3 w-3 rounded-full bg-white"></div>
+
+              </div>
+
+            </div>
+
+
+            <!-- CARD -->
+
+            <div class="pl-6">
+
+              <p class="text-2xl font-black text-slate-950">
+                Mumbai
+              </p>
+
+              <p class="mt-1 text-sm font-medium text-slate-500">
+                Ending Station
+              </p>
+
+            </div>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+
+      <!-- ================================================= -->
+      <!-- FOOTER SUMMARY -->
+      <!-- ================================================= -->
+
+      <div
+        class="border-t border-slate-100 bg-slate-50 px-6 py-6 md:px-10">
+
+        <div
+          class="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
+
+          <div>
+
+            <p class="text-xs font-bold uppercase tracking-widest text-slate-400">
+              Route Summary
+            </p>
+
+            <p class="mt-2 text-sm font-semibold text-slate-700">
+              Pune
+              <span class="mx-2 text-slate-300">→</span>
+              Lonavala
+              <span class="mx-2 text-slate-300">→</span>
+              Khopoli
+              <span class="mx-2 text-slate-300">→</span>
+              Karjat
+              <span class="mx-2 text-slate-300">→</span>
+              Panvel
+              <span class="mx-2 text-slate-300">→</span>
+              Mumbai
+            </p>
+
+          </div>
+
+
+          <div class="flex items-center gap-3">
+
+            <div
+              class="rounded-xl border border-slate-200 bg-white px-4 py-3">
+
+              <p class="text-[10px] font-bold uppercase text-slate-400">
+                Journey
+              </p>
+
+              <p class="mt-1 text-lg font-black text-slate-950">
+                425 KM
+              </p>
+
+            </div>
+
+
+            <div
+              class="rounded-xl border border-slate-200 bg-white px-4 py-3">
+
+              <p class="text-[10px] font-bold uppercase text-slate-400">
+                Stops
+              </p>
+
+              <p class="mt-1 text-lg font-black text-slate-950">
+                5
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

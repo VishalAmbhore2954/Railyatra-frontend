@@ -265,8 +265,7 @@ export class AdminTrainList {
     );
 
     this.router.navigate([
-      '/admin/train-route',
-      train.id
+      '/admin/show-route'
     ]);
 
   }
