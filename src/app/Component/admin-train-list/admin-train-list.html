@@ -1,11 +1,20 @@
 <div class="min-h-screen bg-slate-100 p-6">
 
-  <div class="max-w-6xl mx-auto">
+  <div class="max-w-7xl mx-auto">
 
-    <!-- Header -->
-    <div class="flex justify-between items-center mb-6">
+    <!-- ================= HEADER ================= -->
+
+    <div
+      class="flex flex-col md:flex-row
+             justify-between
+             md:items-center
+             gap-4 mb-6"
+    >
+
+      <!-- TITLE -->
 
       <div>
+
         <h1 class="text-3xl font-bold text-gray-800">
           Train Management
         </h1>
@@ -13,16 +22,28 @@
         <p class="text-gray-500 mt-1">
           Manage all trains in Rail Yatra
         </p>
+
       </div>
 
-      <!-- Total Trains -->
-      <div class="bg-white px-6 py-4 rounded-xl shadow">
+
+      <!-- TOTAL TRAINS -->
+
+      <div
+        class="bg-white
+               px-6 py-4
+               rounded-xl
+               shadow"
+      >
 
         <p class="text-sm text-gray-500">
           Total Trains
         </p>
 
-        <p class="text-2xl font-bold text-blue-600">
+        <p
+          class="text-2xl
+                 font-bold
+                 text-blue-600"
+        >
           {{ trains.length }}
         </p>
 
@@ -31,47 +52,171 @@
     </div>
 
 
-    <!-- Train Table -->
-    <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+    <!-- ================= MAIN CARD ================= -->
 
-      <!-- Table Header -->
-      <div class="bg-gradient-to-r from-blue-700 to-indigo-700
-                  text-white px-6 py-5">
+    <div
+      class="bg-white
+             rounded-2xl
+             shadow-lg
+             overflow-hidden"
+    >
 
-        <h2 class="text-xl font-bold">
-          All Trains
-        </h2>
 
-        <p class="text-blue-100 text-sm mt-1">
-          View all available trains
-        </p>
+      <!-- ================= BLUE HEADER ================= -->
+
+      <div
+        class="bg-gradient-to-r
+               from-blue-700
+               to-indigo-700
+               text-white
+               px-6 py-5"
+      >
+
+        <div
+          class="flex flex-col
+                 md:flex-row
+                 justify-between
+                 md:items-center
+                 gap-4"
+        >
+
+
+          <!-- TITLE -->
+
+          <div>
+
+            <h2 class="text-xl font-bold">
+              All Trains
+            </h2>
+
+            <p
+              class="text-blue-100
+                     text-sm
+                     mt-1"
+            >
+              View and manage all available trains
+            </p>
+
+          </div>
+
+
+          <!-- ================= SEARCH ================= -->
+
+          <div class="relative">
+
+            <input
+              type="text"
+              [(ngModel)]="searchText"
+              (input)="onSearch()"
+              placeholder="Search train..."
+              class="w-full
+                     md:w-80
+                     px-4 py-3
+                     rounded-xl
+                     text-gray-800
+                     bg-white
+                     outline-none
+                     focus:ring-2
+                     focus:ring-blue-300"
+            />
+
+          </div>
+
+        </div>
 
       </div>
 
 
-      <!-- Table -->
+      <!-- ================= SEARCH INFO ================= -->
+
+      <div
+        *ngIf="searchText"
+        class="px-6 py-3
+               bg-blue-50
+               border-b
+               text-sm
+               text-gray-600"
+      >
+
+        Found
+
+        <span
+          class="font-bold
+                 text-blue-700"
+        >
+          {{ getFilteredTrains().length }}
+        </span>
+
+        train(s)
+
+      </div>
+
+
+      <!-- ================= TABLE ================= -->
+
       <div class="overflow-x-auto">
 
         <table class="w-full">
+
+
+          <!-- ================= TABLE HEADER ================= -->
 
           <thead class="bg-gray-100">
 
             <tr>
 
-              <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">
+              <th
+                class="px-6 py-4
+                       text-left
+                       text-sm
+                       font-semibold
+                       text-gray-600"
+              >
                 #
               </th>
 
-              <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">
+
+              <th
+                class="px-6 py-4
+                       text-left
+                       text-sm
+                       font-semibold
+                       text-gray-600"
+              >
                 Train Number
               </th>
 
-              <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">
+
+              <th
+                class="px-6 py-4
+                       text-left
+                       text-sm
+                       font-semibold
+                       text-gray-600"
+              >
                 Train Name
               </th>
 
-              <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">
+
+              <th
+                class="px-6 py-4
+                       text-left
+                       text-sm
+                       font-semibold
+                       text-gray-600"
+              >
                 Train Type
+              </th>
+
+
+              <th
+                class="px-6 py-4
+                       text-center
+                       text-sm
+                       font-semibold
+                       text-gray-600"
+              >
+                Action
               </th>
 
             </tr>
@@ -79,99 +224,367 @@
           </thead>
 
 
+          <!-- ================= TABLE BODY ================= -->
+
           <tbody>
 
-            @for (train of trains; track train.id; let i = $index) {
 
-              <tr
-                class="border-b hover:bg-blue-50 transition">
+            <!-- ================= TRAIN LIST ================= -->
 
-                <!-- Number -->
-                <td class="px-6 py-5 font-semibold text-gray-500">
-                  {{ i + 1 }}
-                </td>
-
-
-                <!-- Train Number -->
-                <td class="px-6 py-5">
-
-                  <span class="font-bold text-blue-700">
-                    {{ train.trainnumber }}
-                  </span>
-
-                </td>
+            <tr
+              *ngFor="
+                let train of getPaginatedTrains();
+                let i = index
+              "
+              class="border-b
+                     hover:bg-blue-50
+                     transition"
+            >
 
 
-                <!-- Train Name -->
-                <td class="px-6 py-5">
+              <!-- NUMBER -->
 
-                  <div class="flex items-center gap-3">
+              <td
+                class="px-6 py-5
+                       font-semibold
+                       text-gray-500"
+              >
 
-                    <div
-                      class="w-10 h-10 rounded-lg bg-blue-100
-                             flex items-center justify-center">
+                {{
+                  ((currentPage - 1)
+                  * itemsPerPage)
+                  + i + 1
+                }}
 
-                      🚆
+              </td>
 
-                    </div>
 
-                    <span class="font-semibold text-gray-800">
-                      {{ train.trainname }}
-                    </span>
+              <!-- TRAIN NUMBER -->
+
+              <td class="px-6 py-5">
+
+                <span
+                  class="font-bold
+                         text-blue-700"
+                >
+
+                  {{ train.trainnumber }}
+
+                </span>
+
+              </td>
+
+
+              <!-- TRAIN NAME -->
+
+              <td class="px-6 py-5">
+
+                <div
+                  class="flex
+                         items-center
+                         gap-3"
+                >
+
+                  <div
+                    class="w-10 h-10
+                           rounded-lg
+                           bg-blue-100
+                           flex items-center
+                           justify-center"
+                  >
+
+                    🚆
 
                   </div>
 
-                </td>
-
-
-                <!-- Train Type -->
-                <td class="px-6 py-5">
 
                   <span
-                    class="inline-block bg-indigo-100 text-indigo-700
-                           px-4 py-2 rounded-full text-sm font-semibold">
+                    class="font-semibold
+                           text-gray-800"
+                  >
 
-                    {{ train.traintype }}
+                    {{ train.trainname }}
 
                   </span>
 
-                </td>
+                </div>
 
-              </tr>
-
-            }
+              </td>
 
 
-            <!-- No Trains -->
-            @if (trains.length === 0) {
+              <!-- TRAIN TYPE -->
 
-              <tr>
+              <td class="px-6 py-5">
 
-                <td
-                  colspan="4"
-                  class="px-6 py-16 text-center">
+                <span
+                  class="inline-block
+                         bg-indigo-100
+                         text-indigo-700
+                         px-4 py-2
+                         rounded-full
+                         text-sm
+                         font-semibold"
+                >
 
-                  <div class="text-5xl mb-4">
-                    🚆
-                  </div>
+                  {{ train.traintype }}
 
-                  <h3 class="text-xl font-bold text-gray-700">
-                    No Trains Found
-                  </h3>
+                </span>
 
-                  <p class="text-gray-500 mt-2">
+              </td>
+
+
+              <!-- ================= ACTION ================= -->
+
+              <td class="px-6 py-5">
+
+                <div
+                  class="flex
+                         justify-center
+                         gap-2"
+                >
+
+
+                  <!-- ROUTE BUTTON -->
+
+                  <button
+                    type="button"
+                    (click)="showRoute(train)"
+                    class="px-4 py-2
+                           bg-green-600
+                           hover:bg-green-700
+                           text-white
+                           rounded-lg
+                           text-sm
+                           font-semibold
+                           transition"
+                  >
+
+                    🛤️ Route
+
+                  </button>
+
+
+                  <!-- EDIT BUTTON -->
+
+                  <button
+                    type="button"
+                    (click)="editTrain(train)"
+                    class="px-4 py-2
+                           bg-blue-600
+                           hover:bg-blue-700
+                           text-white
+                           rounded-lg
+                           text-sm
+                           font-semibold
+                           transition"
+                  >
+
+                    ✏️ Edit
+
+                  </button>
+
+                </div>
+
+              </td>
+
+            </tr>
+
+
+            <!-- ================= NO TRAINS ================= -->
+
+            <tr
+              *ngIf="
+                getFilteredTrains().length === 0
+              "
+            >
+
+              <td
+                colspan="5"
+                class="px-6 py-16
+                       text-center"
+              >
+
+                <div
+                  class="text-5xl
+                         mb-4"
+                >
+                  🚆
+                </div>
+
+
+                <h3
+                  class="text-xl
+                         font-bold
+                         text-gray-700"
+                >
+
+                  No Trains Found
+
+                </h3>
+
+
+                <p
+                  class="text-gray-500
+                         mt-2"
+                >
+
+                  <span *ngIf="searchText">
+                    Try another search term.
+                  </span>
+
+                  <span *ngIf="!searchText">
                     Add a train to see it here.
-                  </p>
+                  </span>
 
-                </td>
+                </p>
 
-              </tr>
+              </td>
 
-            }
+            </tr>
 
           </tbody>
 
         </table>
+
+      </div>
+
+
+      <!-- ================= PAGINATION ================= -->
+
+      <div
+        *ngIf="getTotalPages() > 1"
+        class="flex
+               flex-col
+               md:flex-row
+               justify-between
+               items-center
+               gap-4
+               px-6 py-5
+               border-t
+               bg-gray-50"
+      >
+
+
+        <!-- ================= PAGINATION INFO ================= -->
+
+        <p
+          class="text-sm
+                 text-gray-500"
+        >
+
+          Showing
+
+          <span
+            class="font-semibold
+                   text-gray-700"
+          >
+            {{ getStartItem() }}
+          </span>
+
+          -
+
+          <span
+            class="font-semibold
+                   text-gray-700"
+          >
+            {{ getEndItem() }}
+          </span>
+
+          of
+
+          <span
+            class="font-semibold
+                   text-gray-700"
+          >
+            {{ getFilteredTrains().length }}
+          </span>
+
+        </p>
+
+
+        <!-- ================= PAGINATION BUTTONS ================= -->
+
+        <div
+          class="flex
+                 items-center
+                 gap-2"
+        >
+
+
+          <!-- PREVIOUS -->
+
+          <button
+            type="button"
+            (click)="changePage(currentPage - 1)"
+            [disabled]="currentPage === 1"
+            class="px-4 py-2
+                   border
+                   rounded-lg
+                   bg-white
+                   text-gray-700
+                   hover:bg-gray-100
+                   disabled:opacity-40
+                   disabled:cursor-not-allowed"
+          >
+
+            ←
+
+          </button>
+
+
+          <!-- PAGE NUMBERS -->
+
+          <button
+            *ngFor="let page of getPages()"
+            type="button"
+            (click)="changePage(page)"
+            class="min-w-10
+                   px-3 py-2
+                   border
+                   rounded-lg
+                   font-semibold
+                   bg-white
+                   text-gray-700
+                   hover:bg-gray-100"
+            [class.bg-blue-600]="
+              currentPage === page
+            "
+            [class.text-white]="
+              currentPage === page
+            "
+            [class.border-blue-600]="
+              currentPage === page
+            "
+          >
+
+            {{ page }}
+
+          </button>
+
+
+          <!-- NEXT -->
+
+          <button
+            type="button"
+            (click)="changePage(currentPage + 1)"
+            [disabled]="
+              currentPage === getTotalPages()
+            "
+            class="px-4 py-2
+                   border
+                   rounded-lg
+                   bg-white
+                   text-gray-700
+                   hover:bg-gray-100
+                   disabled:opacity-40
+                   disabled:cursor-not-allowed"
+          >
+
+            →
+
+          </button>
+
+        </div>
 
       </div>
 
