@@ -17,6 +17,7 @@ import { AdminCoachList } from './Component/admin-coach-list/admin-coach-list';
 import { AdminRouteList } from './Component/admin-route-list/admin-route-list';
 import { AdminSeatList } from './Component/admin-seat-list/admin-seat-list';
 import { AdminShowRoute } from './admin-show-route/admin-show-route';
+import { AdminLayout } from './admin-layout/admin-layout';
 
 export const routes: Routes = [
     { path: '', component: Home},
@@ -29,7 +30,7 @@ export const routes: Routes = [
 
 
     {
-        path:'admin',
+        path:'admin', component: AdminLayout,
         children:[
             {path: '',component:AdminHome},
             {path: 'add-train',component:AddTrain},

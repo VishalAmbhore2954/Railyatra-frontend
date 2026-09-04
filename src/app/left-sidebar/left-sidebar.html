@@ -1,0 +1,344 @@
+<!-- ================= MOBILE TOP BAR ================= -->
+<div class="fixed top-0 left-0 right-0 z-50 flex h-16 items-center justify-between bg-slate-950 px-4 text-white lg:hidden">
+
+  <!-- Logo -->
+  <div class="flex items-center gap-2">
+
+    <div class="flex h-9 w-9 items-center justify-center rounded-lg bg-blue-600 font-bold">
+      R
+    </div>
+
+    <span class="text-lg font-bold">
+      RailYatra
+    </span>
+
+  </div>
+
+
+  <!-- Hamburger -->
+  <button
+    type="button"
+    (click)="toggleSidebar()"
+    class="rounded-lg p-2 hover:bg-slate-800">
+
+    <svg
+      class="h-6 w-6"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24">
+
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M4 6h16M4 12h16M4 18h16">
+      </path>
+
+    </svg>
+
+  </button>
+
+</div>
+
+
+<!-- ================= MOBILE OVERLAY ================= -->
+@if (isOpen) {
+
+  <div
+    class="fixed inset-0 z-40 bg-black/50 lg:hidden"
+    (click)="closeSidebar()">
+  </div>
+
+}
+
+
+<!-- ================= SIDEBAR ================= -->
+<aside
+  class="fixed inset-y-0 left-0 z-50 flex w-72 flex-col bg-gradient-to-b from-slate-950 to-slate-900 text-white transition-transform duration-300 lg:translate-x-0"
+  [class.-translate-x-full]="!isOpen"
+  [class.translate-x-0]="isOpen">
+
+
+  <!-- ================= LOGO ================= -->
+  <div class="flex h-20 items-center justify-between border-b border-slate-800 px-6">
+
+    <div class="flex items-center gap-3">
+
+      <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-600 text-xl font-bold">
+        R
+      </div>
+
+      <div>
+        <h1 class="text-lg font-bold">
+          RailYatra
+        </h1>
+
+        <p class="text-xs text-slate-400">
+          Admin Panel
+        </p>
+      </div>
+
+    </div>
+
+
+    <!-- Mobile close -->
+    <button
+      type="button"
+      (click)="closeSidebar()"
+      class="rounded-lg p-2 hover:bg-slate-800 lg:hidden">
+
+      ✕
+
+    </button>
+
+  </div>
+
+
+  <!-- ================= NAVIGATION ================= -->
+  <nav class="flex-1 overflow-y-auto px-4 py-6">
+
+
+    <!-- Dashboard -->
+    <a
+      routerLink="/admin"
+      routerLinkActive="bg-blue-600 text-white"
+      [routerLinkActiveOptions]="{ exact: true }"
+      (click)="closeSidebar()"
+      class="mb-2 flex items-center gap-3 rounded-xl px-4 py-3 text-slate-300 transition hover:bg-slate-800 hover:text-white">
+
+      <span>🏠</span>
+
+      <span class="font-medium">
+        Dashboard
+      </span>
+
+    </a>
+
+
+    <!-- ================= MAIN ================= -->
+    <p class="mb-3 mt-6 px-4 text-xs font-semibold uppercase tracking-wider text-slate-500">
+      Management
+    </p>
+
+
+    <!-- Trains -->
+    <a
+      routerLink="/admin/train-list"
+      routerLinkActive="bg-blue-600 text-white"
+      (click)="closeSidebar()"
+      class="mb-2 flex items-center gap-3 rounded-xl px-4 py-3 text-slate-300 transition hover:bg-slate-800 hover:text-white">
+
+      <span>🚆</span>
+
+      <span>
+        Trains
+      </span>
+
+    </a>
+
+
+    <!-- Stations -->
+    <a
+      routerLink="/admin/station-list"
+      routerLinkActive="bg-blue-600 text-white"
+      (click)="closeSidebar()"
+      class="mb-2 flex items-center gap-3 rounded-xl px-4 py-3 text-slate-300 transition hover:bg-slate-800 hover:text-white">
+
+      <span>📍</span>
+
+      <span>
+        Stations
+      </span>
+
+    </a>
+
+
+    <!-- Routes -->
+    <a
+      routerLink="/admin/route-list"
+      routerLinkActive="bg-blue-600 text-white"
+      (click)="closeSidebar()"
+      class="mb-2 flex items-center gap-3 rounded-xl px-4 py-3 text-slate-300 transition hover:bg-slate-800 hover:text-white">
+
+      <span>🛤️</span>
+
+      <span>
+        Routes
+      </span>
+
+    </a>
+
+
+    <!-- ================= ADD ================= -->
+    <p class="mb-3 mt-8 px-4 text-xs font-semibold uppercase tracking-wider text-slate-500">
+      Add / Manage
+    </p>
+
+
+    <!-- Add Train -->
+    <a
+      routerLink="/admin/add-train"
+      routerLinkActive="bg-blue-600 text-white"
+      (click)="closeSidebar()"
+      class="mb-2 flex items-center gap-3 rounded-xl px-4 py-3 text-slate-300 transition hover:bg-slate-800 hover:text-white">
+
+      <span>➕</span>
+
+      <span>
+        Add Train
+      </span>
+
+    </a>
+
+
+    <!-- Add Station -->
+    <a
+      routerLink="/admin/add-station"
+      routerLinkActive="bg-blue-600 text-white"
+      (click)="closeSidebar()"
+      class="mb-2 flex items-center gap-3 rounded-xl px-4 py-3 text-slate-300 transition hover:bg-slate-800 hover:text-white">
+
+      <span>📍</span>
+
+      <span>
+        Add Station
+      </span>
+
+    </a>
+
+
+    <!-- Add Route -->
+    <a
+      routerLink="/admin/add-route"
+      routerLinkActive="bg-blue-600 text-white"
+      (click)="closeSidebar()"
+      class="mb-2 flex items-center gap-3 rounded-xl px-4 py-3 text-slate-300 transition hover:bg-slate-800 hover:text-white">
+
+      <span>🛤️</span>
+
+      <span>
+        Add Route
+      </span>
+
+    </a>
+
+
+    <!-- Add Coach -->
+    <a
+      routerLink="/admin/add-coach"
+      routerLinkActive="bg-blue-600 text-white"
+      (click)="closeSidebar()"
+      class="mb-2 flex items-center gap-3 rounded-xl px-4 py-3 text-slate-300 transition hover:bg-slate-800 hover:text-white">
+
+      <span>🚃</span>
+
+      <span>
+        Add Coach
+      </span>
+
+    </a>
+
+
+    <!-- Add Seat -->
+    <a
+      routerLink="/admin/add-seat"
+      routerLinkActive="bg-blue-600 text-white"
+      (click)="closeSidebar()"
+      class="mb-2 flex items-center gap-3 rounded-xl px-4 py-3 text-slate-300 transition hover:bg-slate-800 hover:text-white">
+
+      <span>💺</span>
+
+      <span>
+        Add Seat
+      </span>
+
+    </a>
+
+
+    <!-- ================= OTHERS ================= -->
+    <p class="mb-3 mt-8 px-4 text-xs font-semibold uppercase tracking-wider text-slate-500">
+      Others
+    </p>
+
+
+    <a
+      routerLink="/admin/bookings"
+      routerLinkActive="bg-blue-600 text-white"
+      (click)="closeSidebar()"
+      class="mb-2 flex items-center gap-3 rounded-xl px-4 py-3 text-slate-300 transition hover:bg-slate-800 hover:text-white">
+
+      <span>🎫</span>
+
+      <span>
+        Bookings
+      </span>
+
+    </a>
+
+
+    <a
+      routerLink="/admin/users"
+      routerLinkActive="bg-blue-600 text-white"
+      (click)="closeSidebar()"
+      class="mb-2 flex items-center gap-3 rounded-xl px-4 py-3 text-slate-300 transition hover:bg-slate-800 hover:text-white">
+
+      <span>👥</span>
+
+      <span>
+        Users
+      </span>
+
+    </a>
+
+
+    <a
+      routerLink="/admin/reports"
+      routerLinkActive="bg-blue-600 text-white"
+      (click)="closeSidebar()"
+      class="mb-2 flex items-center gap-3 rounded-xl px-4 py-3 text-slate-300 transition hover:bg-slate-800 hover:text-white">
+
+      <span>📊</span>
+
+      <span>
+        Reports
+      </span>
+
+    </a>
+
+  </nav>
+
+
+  <!-- ================= BOTTOM ================= -->
+  <div class="border-t border-slate-800 p-4">
+
+
+    <a
+      routerLink="/admin/settings"
+      routerLinkActive="bg-blue-600 text-white"
+      (click)="closeSidebar()"
+      class="mb-2 flex items-center gap-3 rounded-xl px-4 py-3 text-slate-300 transition hover:bg-slate-800 hover:text-white">
+
+      <span>⚙️</span>
+
+      <span>
+        Settings
+      </span>
+
+    </a>
+
+
+    <button
+      type="button"
+      class="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-slate-300 transition hover:bg-red-500/10 hover:text-red-400">
+
+      <span>🚪</span>
+
+      <span>
+        Logout
+      </span>
+
+    </button>
+
+  </div>
+
+</aside>
